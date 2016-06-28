@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#F50057</color>
+    <color name="colorPrimaryDark">#F50057</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="viewBg">#f1f5f8</color>
+    <color name="album_title">#4c4c4c</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="text_color">#0066CC</color>
+    <color name="bg_color">#f0f0f1</color>
+    <color name="bg_arrival_time">#CCCCCC</color>
+    <color name="black">#000000</color>
+
+    <color name="bg_text_view">#1477C5</color>
 </resources>

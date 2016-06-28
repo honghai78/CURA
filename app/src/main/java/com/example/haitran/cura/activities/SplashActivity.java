@@ -1,4 +1,4 @@
-package com.example.haitran.cura.activities;
+package com.example.haitran.cura.activities.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
