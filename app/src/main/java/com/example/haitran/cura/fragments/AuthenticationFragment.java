@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -226,5 +227,25 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     private boolean checkPassCode(String digitInput, String pass){
         if(digitInput.equals(pass)) return true;
         return false;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_2");
+                    if (fragment != null) {
+                        getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 }
