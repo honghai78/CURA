@@ -4,10 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF0000</color>
     <color name="colorAccentRe">#FF4081</color>
-
     <color name="bgInputDigit">#DDDDDD</color>
     <color name="bgCellInputDigit">#BBBBBB</color>
     <color name="text_code">#FFFFFF</color>
     <color name="keyboardCode">#0C1E23</color>
     <color name="black">#000000</color>
+    <color name="red">#FF4040</color>
+>>>>>>> kha.phan
 </resources>
