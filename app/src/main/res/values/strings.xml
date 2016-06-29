@@ -4,4 +4,8 @@
     <string name="splash_title_sub">Companion App</string>
     <string name="splash_sub">Affordable, Continous, Personalised</string>
     <string name="signin_hello">Hello! Tap your name to get a 4 digit authentication on your phone.</string>
+
+    <string name="message_authentication">Enter your 4 digit authentication code</string>
+    <string name="hello_educator">Good morning,</string>
+    <string name="resend_code">Resend Code</string>
 </resources>

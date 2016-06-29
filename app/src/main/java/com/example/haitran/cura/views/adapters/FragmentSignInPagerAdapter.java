@@ -22,7 +22,9 @@ public class FragmentSignInPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return SignInFragment.newInstance(position + 1);
+        SignInFragment fragment = new SignInFragment();
+        fragment.setmPage(position+1);
+        return fragment;
     }
 
     @Override
