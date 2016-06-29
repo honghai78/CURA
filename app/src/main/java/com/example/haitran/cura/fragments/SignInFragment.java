@@ -83,6 +83,7 @@ public class SignInFragment extends Fragment {
                 AuthenticationFragment frag = new AuthenticationFragment();
                 frag.setNameEducator(textView.getText()+"");
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.transition.slide_in, R.transition.slide_out);
                 fragmentTransaction.add(R.id.signin_line2, frag, "PAGE_2").commit();
             }
         });
