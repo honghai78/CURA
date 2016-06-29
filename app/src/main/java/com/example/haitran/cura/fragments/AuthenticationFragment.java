@@ -26,9 +26,10 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     private TextView mDigitFirst, mDigitSecond, mDigitThird,mDigitFourth;
     private TextView mKey_1, mKey_2, mKey_3, mKey_4, mKey_5, mKey_6,
             mKey_7, mKey_8, mKey_9, mKey_0;
-    private TextView mKeyClear, mKeyTick;
+    private TextView mResendCode,mKeyClear, mKeyTick;
     private String mDigitInput = "";
     private Toast mToast;
+
 
     public void setNameEducator(String educatorName) {
         this.educatorName = educatorName;
@@ -38,6 +39,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        appCompatActivity.getSupportActionBar().show();
         appCompatActivity.getSupportActionBar().setTitle("Authentication");
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
@@ -75,6 +77,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         mKey_7 = (TextView) view.findViewById(R.id.text_keyboard_7);
         mKey_8 = (TextView) view.findViewById(R.id.text_keyboard_8);
         mKey_9 = (TextView) view.findViewById(R.id.text_keyboard_9);
+        mResendCode = (TextView) view.findViewById(R.id.text_resend_code);
         mKeyClear = (TextView) view.findViewById(R.id.text_clear);
         mKeyTick = (TextView) view.findViewById(R.id.text_tick);
     }
@@ -99,6 +102,16 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(View v) {
                 logIn();
+            }
+        });
+        mResendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDigitInput="";
+                mDigitFirst.setText("");
+                mDigitSecond.setText("");
+                mDigitThird.setText("");
+                mDigitFourth.setText("");
             }
         });
 
