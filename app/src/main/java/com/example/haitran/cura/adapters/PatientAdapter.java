@@ -1,15 +1,20 @@
 package com.example.haitran.cura.adapters;
 
+import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.fragments.DatePickerFragment;
+import com.example.haitran.cura.fragments.TimePickerFragment;
 import com.example.haitran.cura.models.Patient;
 
 import java.util.List;
@@ -18,11 +23,11 @@ import java.util.List;
  * Created by hanh.tran on 6/28/2016.
  */
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHolder> {
-    private Context mContext;
+    private Activity mContext;
     private List<Patient> patientList;
 
 
-    public PatientAdapter(Context mContext, List<Patient> patientList) {
+    public PatientAdapter(Activity mContext, List<Patient> patientList) {
         this.mContext = mContext;
         this.patientList = patientList;
     }
@@ -42,21 +47,25 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyViewHo
 
         if (patient.getGender() == 0) {
             holder.txt_name_patient.setText("Mr. " + patient.getName());
-            holder.txt_gender_patient.setText(", Male");
+            holder.txt_gender_patient.setText(" yrs, Male");
         } else {
             holder.txt_name_patient.setText("Ms. " + patient.getName());
-            holder.txt_gender_patient.setText(", Female");
+            holder.txt_gender_patient.setText(" yrs, Female");
         }
         holder.txt_id_patient.setText(patient.getId());
         holder.txt_code_patient.setText(patient.getCode());
         holder.txt_name_doctor.setText(patient.getNameDoctor());
-        holder.txt_count_visit.setText(patient.getNumOfExam()+"");
-        holder.txt_age_patient.setText(patient.getAge()+"");
+        holder.txt_count_visit.setText(patient.getNumOfExam() + "");
+        holder.txt_age_patient.setText(patient.getAge() + "");
 
         holder.img_arrival_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Set time!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "Set time!", Toast.LENGTH_SHORT).show();
+                DialogFragment timeFragment = new TimePickerFragment();
+                timeFragment.show(mContext.getFragmentManager(), "TimePicker");
+
+//                dayFragment.onDateSet());
             }
         });
     }
