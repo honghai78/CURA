@@ -40,7 +40,9 @@ public class SignInActivity extends AppCompatActivity {
 //                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_2");
                 if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                    fragmentTransaction.remove(fragment).commit();
                     getSupportActionBar().hide();
                 }
                 break;

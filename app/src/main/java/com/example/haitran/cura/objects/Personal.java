@@ -5,11 +5,12 @@ package com.example.haitran.cura.objects;
  */
 public class Personal {
 
-    private String name, level;
-    public Personal(String name, String level)
+    private String name, level, phone;
+    public Personal(String name, String level, String phone)
     {
         this.name=name;
         this.level=level;
+        this.phone = phone;
     }
 
     public String getLevel() {
@@ -18,5 +19,9 @@ public class Personal {
 
     public String getName() {
         return name;
+    }
+
+    public String getPhoneNumber() {
+        return phone;
     }
 }

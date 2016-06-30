@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.view.KeyEvent;
@@ -275,7 +276,9 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_2");
                     if (fragment != null) {
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                        fragmentTransaction.remove(fragment).commit();
                         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
                     }
                     return true;
