@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.haitran.cura.KeyBoardEffect;
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.activities.HomeActivity;
 import com.example.haitran.cura.activities.SplashActivity;
@@ -26,9 +28,11 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     private TextView mDigitFirst, mDigitSecond, mDigitThird,mDigitFourth;
     private TextView mKey_1, mKey_2, mKey_3, mKey_4, mKey_5, mKey_6,
             mKey_7, mKey_8, mKey_9, mKey_0;
+    private View mLayout;
     private TextView mResendCode,mKeyClear, mKeyTick;
     private String mDigitInput = "";
     private Toast mToast;
+    private KeyBoardEffect mKeyBoardEffect;
 
 
     public void setNameEducator(String educatorName) {
@@ -51,6 +55,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         super.onViewCreated(view, savedInstanceState);
         getWidgets(view);
         addEvent();
+        addEffectKeyBoard();
         if (educatorName!=null) mTextHello.setText(mTextHello.getText() + " "+educatorName +",");
         else mTextHello.setText(mTextHello.getText() + " Mrs.Kha" +",");
     }
@@ -62,6 +67,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     }
 
     private void getWidgets(View view){
+        mLayout = (View) view.findViewById(R.id.layout_full);
         mTextHello  = (TextView) view.findViewById(R.id.text_hello);
         mDigitFirst = (TextView) view.findViewById(R.id.text_digit_first);
         mDigitSecond = (TextView) view.findViewById(R.id.text_digit_second);
@@ -81,6 +87,22 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         mKeyClear = (TextView) view.findViewById(R.id.text_clear);
         mKeyTick = (TextView) view.findViewById(R.id.text_tick);
     }
+    private void addEffectKeyBoard(){
+        mKeyBoardEffect = new KeyBoardEffect();
+        mKeyBoardEffect.setButtonEffect(mKey_0);
+        mKeyBoardEffect.setButtonEffect(mKey_1);
+        mKeyBoardEffect.setButtonEffect(mKey_2);
+        mKeyBoardEffect.setButtonEffect(mKey_3);
+        mKeyBoardEffect.setButtonEffect(mKey_4);
+        mKeyBoardEffect.setButtonEffect(mKey_5);
+        mKeyBoardEffect.setButtonEffect(mKey_6);
+        mKeyBoardEffect.setButtonEffect(mKey_7);
+        mKeyBoardEffect.setButtonEffect(mKey_8);
+        mKeyBoardEffect.setButtonEffect(mKey_9);
+        mKeyBoardEffect.setButtonEffect(mKeyClear);
+        mKeyBoardEffect.setButtonEffect(mKeyTick);
+
+    }
     private void addEvent(){
         mKey_0.setOnClickListener(this);
         mKey_1.setOnClickListener(this);
@@ -92,6 +114,11 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         mKey_7.setOnClickListener(this);
         mKey_8.setOnClickListener(this);
         mKey_9.setOnClickListener(this);
+        mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         mKeyClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,11 +134,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         mResendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDigitInput="";
-                mDigitFirst.setText("");
-                mDigitSecond.setText("");
-                mDigitThird.setText("");
-                mDigitFourth.setText("");
+
             }
         });
 
