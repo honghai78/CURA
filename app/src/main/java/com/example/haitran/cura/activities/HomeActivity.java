@@ -6,26 +6,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.data.MyData;
 import com.example.haitran.cura.fragments.InQueueFragment;
 import com.example.haitran.cura.fragments.RegisteredPatientFragment;
+import com.example.haitran.cura.models.Patient;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView  mTxtCountRegistered, mTxtCountQueue, mTxtRegistered, mTxtInQueue,
+    private TextView  mTxtCountRegistered, mTxtCountQueue,
             mTxtBgRegistered, mTxtBgQueue;
+    private LinearLayout linear_registered, linear_queue;
 
     private boolean isRegistered;
 
+
+    private Patient patientSelected;
+    private List<Patient> registeredPatientList;
+    private List<Patient> patientListInQueue;
+    private MyData data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWidgets();
+        data = new MyData();
 
         ActionBar ab = getSupportActionBar();
         ab.setTitle("Home");
@@ -34,25 +46,39 @@ public class HomeActivity extends AppCompatActivity {
         ab.setIcon(R.mipmap.ic_home_3);
         ab.setDefaultDisplayHomeAsUpEnabled(true);
 
+        //Get data from MyData
+        registeredPatientList = data.getRegisteredPatientList();
+//        patientListInQueue = data.getPatientListInQueue();
+        patientListInQueue = data.sortPatientByTimeInQueue();
+
         RegisteredPatientFragment registeredPatientFragment = new RegisteredPatientFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_fragment, registeredPatientFragment).commit();
         isRegistered = true;
 
-        mTxtCountRegistered.setText("(" + registeredPatientFragment.countRegisteredPatient() + ")");
+        mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
+        mTxtCountQueue.setText("(" + patientListInQueue.size() + ")");
 
-        mTxtRegistered.setOnClickListener(new View.OnClickListener() {
+        linear_registered.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registeredClick();
             }
         });
 
-        mTxtInQueue.setOnClickListener(new View.OnClickListener() {
+        linear_queue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inQueueClick();
             }
         });
+    }
+
+    public void reload(){
+        registeredPatientList = data.getRegisteredPatientList();
+        patientListInQueue = data.getPatientListInQueue();
+
+        mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
+        mTxtCountQueue.setText("(" + patientListInQueue.size() + ")");
     }
 
     @Override
@@ -80,13 +106,14 @@ public class HomeActivity extends AppCompatActivity {
         mTxtBgRegistered = (TextView) findViewById(R.id.txt_bg_registered_home);
         mTxtCountQueue = (TextView) findViewById(R.id.txt_count_queue_home);
         mTxtBgQueue = (TextView) findViewById(R.id.txt_bg_queue_home);
-        mTxtRegistered = (TextView) findViewById(R.id.txt_registered_home);
-        mTxtInQueue = (TextView) findViewById(R.id.txt_in_queue_home);
+
+        linear_queue = (LinearLayout) findViewById(R.id.linear_in_queue_home);
+        linear_registered = (LinearLayout) findViewById(R.id.linear_register_home);
     }
 
 
     public void registeredClick() {
-        mTxtBgRegistered.setBackgroundResource(R.drawable.bg_text_view);
+        mTxtBgRegistered.setBackgroundResource(R.color.colorPrimary);
         mTxtBgQueue.setBackgroundResource(android.R.color.transparent);
 
         if (!isRegistered) {
@@ -97,7 +124,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void inQueueClick() {
-        mTxtBgQueue.setBackgroundResource(R.drawable.bg_text_view);
+        mTxtBgQueue.setBackgroundResource(R.color.colorPrimary);
         mTxtBgRegistered.setBackgroundResource(android.R.color.transparent);
 
         if (isRegistered) {
@@ -107,8 +134,36 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(this, "In Queue click", Toast.LENGTH_SHORT).show();
     }
 
-//    public void setCountRegisteredPatient(int count){
-//        mTxtCountRegistered.setText("(" + count + ")");
-//    }
+    public void setPatientSelected(Patient patientSelected) {
+        this.patientSelected = patientSelected;
+    }
 
+    public Patient getPatientSelected() {
+        return patientSelected;
+    }
+
+    public void updateRegisteredPatient(int num){
+        addPatientInQueue();
+        removeRegisteredPatient(num);
+
+
+        reload();
+        inQueueClick();
+    }
+
+    public void addPatientInQueue(){
+        data.addPatientInQueue(getPatientSelected());
+    }
+
+    public void removeRegisteredPatient(int position){
+        data.removeRegisteredPatient(position);
+    }
+
+    public List<Patient> getPatientListInQueue(){
+        return data.getPatientListInQueue();
+    }
+
+    public List<Patient> getRegisteredPatientList() {
+        return registeredPatientList;
+    }
 }

@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.haitran.cura.R;
-import com.example.haitran.cura.adapters.PatientAdapter;
+import com.example.haitran.cura.activities.HomeActivity;
+import com.example.haitran.cura.adapters.RegisteredPatientAdapter;
 import com.example.haitran.cura.models.Patient;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,19 +28,14 @@ public class RegisteredPatientFragment extends Fragment {
     private TextView mTxtDateCurrent, mTxtCountPatient;
     private RecyclerView recycler_patient;
 
-    private PatientAdapter adapter;
-    private List<Patient> patients = new ArrayList<Patient>(){{
-        add(new Patient("10000" + 0, "abc 1", 77, "000000000" + 0, 0, "xyz 1", 1));
-        add(new Patient("10000" + 1, "abc 2", 89, "000000000" + 1, 1, "xyz 2", 0));
-        add(new Patient("10000" + 2, "abc 3", 77, "000000000" + 2, 0, "xyz 3", 2));
-        add(new Patient("10000" + 3, "abc 4", 27, "000000000" + 3, 0, "xyz 4", 1));
-        add(new Patient("10000" + 4, "abc 5", 19, "000000000" + 4, 1, "xyz 5", 0));
-        add(new Patient("10000" + 5, "abc 6", 47, "000000000" + 5, 0, "xyz 6", 2));
-    }};
+    private RegisteredPatientAdapter adapter;
+    private List<Patient> registeredPatientList;
+
 
     private int countRegisteredPatient;
 
-    public RegisteredPatientFragment( ) {}
+    public RegisteredPatientFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +52,8 @@ public class RegisteredPatientFragment extends Fragment {
         Calendar cal = Calendar.getInstance();
         mTxtDateCurrent.setText(new SimpleDateFormat("dd MMMM yyyy").format(cal.getTime()));
 
-        setUpData();
-        countRegisteredPatient = patients.size();
+        setUpRecyclerView();
+        countRegisteredPatient = registeredPatientList.size();
         mTxtCountPatient.setText(countRegisteredPatient + "");
     }
 
@@ -68,21 +63,13 @@ public class RegisteredPatientFragment extends Fragment {
         recycler_patient = (RecyclerView) view.findViewById(R.id.recycler_view_frg_registered);
     }
 
-    public void setUpData() {
-//        patients.add(new Patient("10000" + 0, "abc 1", 77, "000000000" + 0, 0, "xyz 1", 1));
-//        patients.add(new Patient("10000" + 1, "abc 2", 89, "000000000" + 1, 1, "xyz 2", 0));
-//        patients.add(new Patient("10000" + 2, "abc 3", 77, "000000000" + 2, 0, "xyz 3", 2));
-//        patients.add(new Patient("10000" + 3, "abc 4", 27, "000000000" + 3, 0, "xyz 4", 1));
-//        patients.add(new Patient("10000" + 4, "abc 5", 19, "000000000" + 4, 1, "xyz 5", 0));
-//        patients.add(new Patient("10000" + 5, "abc 6", 47, "000000000" + 5, 0, "xyz 6", 2));
+    public void setUpRecyclerView() {
+        //Get all registered patient
+        registeredPatientList = ((HomeActivity) getActivity()).getRegisteredPatientList();
 
-        adapter = new PatientAdapter(getActivity(), patients);
+        adapter = new RegisteredPatientAdapter(getActivity(), registeredPatientList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recycler_patient.setLayoutManager(mLayoutManager);
         recycler_patient.setAdapter(adapter);
-    }
-
-    public int countRegisteredPatient() {
-        return patients.size();
     }
 }

@@ -11,6 +11,7 @@ public class Patient {
     private int gender;
     private String nameDoctor;
     private int numOfExam;
+    private String timeArrival;
 
     public Patient(String id, String name, int age, String code, int gender, String nameDoctor, int numOfExam) {
         this.id = id;
@@ -20,6 +21,25 @@ public class Patient {
         this.gender = gender;
         this.nameDoctor = nameDoctor;
         this.numOfExam = numOfExam;
+    }
+
+    public Patient(String id, String name, int age, String code, int gender, String nameDoctor, int numOfExam, String timeArrival) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.code = code;
+        this.gender = gender;
+        this.nameDoctor = nameDoctor;
+        this.numOfExam = numOfExam;
+        this.timeArrival = timeArrival;
+    }
+
+    public String getTimeArrival() {
+        return timeArrival;
+    }
+
+    public void setTimeArrival(String timeArrival) {
+        this.timeArrival = timeArrival;
     }
 
     public String getId() {

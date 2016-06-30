@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="TimePicker" parent="@android:style/Widget.DeviceDefault.DatePicker">
+    <style name="TimePicker" parent="@android:style/Widget.Material.TimePicker">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
