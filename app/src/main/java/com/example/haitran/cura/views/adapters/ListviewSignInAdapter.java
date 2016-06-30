@@ -27,7 +27,7 @@ import java.util.List;
 public class ListviewSignInAdapter extends RecyclerView.Adapter<ListviewSignInAdapter.MyViewHolder> {
 
     Context mContext;
-    private final static int FADE_DURATION = 800;
+    private final static int FADE_DURATION = 500;
     AppCompatActivity mAppCompatActivity;
     List<Personal> mList;
     public ListviewSignInAdapter(Context context, List<Personal> list, AppCompatActivity appCompatActivity)
