@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\CuraProject\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_192f110ce390f76684c53a7c3efb85c0f793ac0c.jar" />
+    </item>
+    <item
+        jar="E:\CuraProject\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_5ea5a520dab6c9ca286baac65b0a51fbcf0c430d.jar" />
+    </item>
+    <item
+        jar="E:\CuraProject\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_02c46835744bf13a63a029e0570e9c67b4488f99.jar" />
+    </item>
+    <item
+        jar="E:\CuraProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_89869695ab1b7a25bd0bf22c6b8c34484306dafd.jar" />
+    </item>
+    <item
+        jar="C:\Users\tuan.huynh\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_b2cb259a3b8f8e58160292f4528850ac9d76cb00.jar" />
+    </item>
+    <item
+        jar="E:\CuraProject\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\CuraProject\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_84970d0639ae820b23aff150ae732c7d8111495e.jar" />
+    </item>
+
+</items>
