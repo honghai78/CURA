@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Patient patientSelected;
     private List<Patient> registeredPatientList;
-    private List<Patient> patientListInQueue;
+    private List<Patient> patientsInQueueList;
     private MyData data;
 
     @Override
@@ -48,15 +48,15 @@ public class HomeActivity extends AppCompatActivity {
 
         //Get data from MyData
         registeredPatientList = data.getRegisteredPatientList();
-//        patientListInQueue = data.getPatientListInQueue();
-        patientListInQueue = data.sortPatientByTimeInQueue();
+//        patientsInQueueList = data.getPatientsInQueueList();
+        patientsInQueueList = data.sortPatientByTimeInQueue();
 
         RegisteredPatientFragment registeredPatientFragment = new RegisteredPatientFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_fragment, registeredPatientFragment).commit();
         isRegistered = true;
 
         mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
-        mTxtCountQueue.setText("(" + patientListInQueue.size() + ")");
+        mTxtCountQueue.setText("(" + patientsInQueueList.size() + ")");
 
         linear_registered.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +75,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void reload(){
         registeredPatientList = data.getRegisteredPatientList();
-        patientListInQueue = data.getPatientListInQueue();
+        patientsInQueueList = data.sortPatientByTimeInQueue();
 
         mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
-        mTxtCountQueue.setText("(" + patientListInQueue.size() + ")");
+        mTxtCountQueue.setText("(" + patientsInQueueList.size() + ")");
     }
 
     @Override
@@ -110,7 +110,6 @@ public class HomeActivity extends AppCompatActivity {
         linear_queue = (LinearLayout) findViewById(R.id.linear_in_queue_home);
         linear_registered = (LinearLayout) findViewById(R.id.linear_register_home);
     }
-
 
     public void registeredClick() {
         mTxtBgRegistered.setBackgroundResource(R.color.colorPrimary);
@@ -146,7 +145,6 @@ public class HomeActivity extends AppCompatActivity {
         addPatientInQueue();
         removeRegisteredPatient(num);
 
-
         reload();
         inQueueClick();
     }
@@ -159,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
         data.removeRegisteredPatient(position);
     }
 
-    public List<Patient> getPatientListInQueue(){
+    public List<Patient> getPatientsInQueueList(){
         return data.getPatientListInQueue();
     }
 

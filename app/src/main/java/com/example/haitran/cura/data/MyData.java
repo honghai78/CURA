@@ -45,7 +45,7 @@ public class MyData {
         for (int i = 0; i < patientListInQueue.size() - 1; i++) {
             temp1 = patientListInQueue.get(i);
             int[] time_pi = seperateTime(temp1.getTimeArrival());
-            for (int j = i; j < patientListInQueue.size(); j++) {
+            for (int j = i + 1; j < patientListInQueue.size(); j++) {
                 temp2 = patientListInQueue.get(j);
                 int[] time_pj = seperateTime(temp2.getTimeArrival());
 

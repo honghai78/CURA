@@ -49,7 +49,13 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
         holder.txt_code_patient.setText(patient.getCode());
         holder.txt_count_visit.setText(patient.getNumOfExam() + "");
         holder.txt_age_patient.setText(patient.getAge() + "");
-        holder.txt_arrival_time.setText(patient.getTimeArrival());
+
+        int[] times = seperateTime(patient.getTimeArrival());
+        if (times[0] >= 12) {
+            holder.txt_arrival_time.setText(patient.getTimeArrival() + " pm");
+        } else {
+            holder.txt_arrival_time.setText(patient.getTimeArrival() + " am");
+        }
     }
 
     @Override
@@ -62,6 +68,7 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
                 txt_code_patient, txt_count_visit, txt_arrival_time;
 
         public ImageView img_patient;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             txt_id_patient = (TextView) itemView.findViewById(R.id.txt_id_patient_cv_iq);
@@ -70,8 +77,13 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
             txt_gender_patient = (TextView) itemView.findViewById(R.id.txt_gender_patient_cv_iq);
             txt_code_patient = (TextView) itemView.findViewById(R.id.txt_code_patient_cv_iq);
             txt_count_visit = (TextView) itemView.findViewById(R.id.txt_count_visit_cv_iq);
-            img_patient =(ImageView) itemView.findViewById(R.id.img_patient_cv_iq);
+            img_patient = (ImageView) itemView.findViewById(R.id.img_patient_cv_iq);
             txt_arrival_time = (TextView) itemView.findViewById(R.id.txt_arrival_time_cv_iq);
         }
+    }
+
+    public int[] seperateTime(String time) {
+        String[] values = time.split(":");
+        return new int[]{Integer.parseInt(values[0]), Integer.parseInt(values[1])};
     }
 }

@@ -31,9 +31,6 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
     private List<Patient> patientList;
     private RegisteredPatientFragment registeredFragment;
     private static String time = "";
-    private Patient patientSelected;
-    private int currentPosition;
-
 
     public RegisteredPatientAdapter(Activity mContext, List<Patient> patientList, RegisteredPatientFragment registeredFragment) {
         this.mContext = mContext;
@@ -70,18 +67,24 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
         holder.img_set_arrival_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                patientSelected = patient;
-                currentPosition = position;
 
                 Calendar cal = Calendar.getInstance();
-                TimePickerDialog tpd = new TimePickerDialog(new ContextThemeWrapper(mContext, R.style.TimePicker), new TimePickerDialog.OnTimeSetListener() {
+                final TimePickerDialog tpd = new TimePickerDialog(new ContextThemeWrapper(mContext, R.style.TimePicker), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        time = hourOfDay + ":" + minute;
-                        patientSelected.setTimeArrival(time);
-                        setArrivalTime(patientSelected, currentPosition);
+                        if (hourOfDay < 10 && minute < 10) {
+                            time = "0" + hourOfDay + ":0" + minute;
+                        } else if (hourOfDay < 10) {
+                            time = "0" + hourOfDay + ":" + minute;
+                        } else if (minute < 10) {
+                            time = hourOfDay + ":0" + minute;
+                        } else {
+                            time = hourOfDay + ":" + minute;
+                        }
+                        patient.setTimeArrival(time);
+                        setArrivalTime(patient, position);
                     }
-                }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), false);
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
 
                 TextView txt_title = new TextView(mContext);
                 txt_title.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
