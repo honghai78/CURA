@@ -1,15 +1,20 @@
 package com.example.haitran.cura.activities;
 
-import android.support.v4.view.PagerTabStrip;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
@@ -17,14 +22,13 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.adapters.HomePagerAdapter;
 import com.example.haitran.cura.data.MyData;
-import com.example.haitran.cura.fragments.InQueueFragment;
-import com.example.haitran.cura.fragments.RegisteredPatientFragment;
 import com.example.haitran.cura.models.Patient;
 
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+    //final Context context = this;
     private HomePagerAdapter homePagerAdapter;
     private ViewPager viewPagerHome;
     private PagerSlidingTabStrip pagerTabStripHome;
@@ -93,11 +97,125 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Search clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_about:
-                Toast.makeText(getBaseContext(), "About clicked", Toast.LENGTH_SHORT).show();
-                break;
+                createDialogToShowChoseFolder();
+                //Toast.makeText(getBaseContext(), "About clicked", Toast.LENGTH_SHORT).show();
+                return true;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
+
+    public void createDialogToShowChoseFolder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.layout_chose_folder_to_save, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        CheckBox checkBox1 = (CheckBox) dialogView.findViewById(R.id.chk_external_labs);
+        CheckBox checkBox2 = (CheckBox) dialogView.findViewById(R.id.chk_sugar_logbook);
+        CheckBox checkBox3 = (CheckBox) dialogView.findViewById(R.id.chk_physical_exam);
+        CheckBox checkBox4 = (CheckBox) dialogView.findViewById(R.id.chk_in_patient_notes);
+        CheckBox checkBox5 = (CheckBox) dialogView.findViewById(R.id.chk_medicines);
+
+        checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox1.isChecked()) {
+                    checkBox2.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                    checkBox4.setEnabled(false);
+                    checkBox5.setEnabled(false);
+                } else {
+                    checkBox2.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                    checkBox4.setEnabled(true);
+                    checkBox5.setEnabled(true);
+                }
+            }
+        });
+        checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox2.isChecked()) {
+                    checkBox1.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                    checkBox4.setEnabled(false);
+                    checkBox5.setEnabled(false);
+                } else {
+                    checkBox1.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                    checkBox4.setEnabled(true);
+                    checkBox5.setEnabled(true);
+                }
+            }
+        });
+        checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox3.isChecked()) {
+                    checkBox2.setEnabled(false);
+                    checkBox1.setEnabled(false);
+                    checkBox4.setEnabled(false);
+                    checkBox5.setEnabled(false);
+                } else {
+                    checkBox2.setEnabled(true);
+                    checkBox1.setEnabled(true);
+                    checkBox4.setEnabled(true);
+                    checkBox5.setEnabled(true);
+                }
+            }
+        });
+        checkBox4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox4.isChecked()) {
+                    checkBox2.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                    checkBox1.setEnabled(false);
+                    checkBox5.setEnabled(false);
+                } else {
+                    checkBox2.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                    checkBox1.setEnabled(true);
+                    checkBox5.setEnabled(true);
+                }
+            }
+        });
+        checkBox5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (checkBox5.isChecked()) {
+                    checkBox2.setEnabled(false);
+                    checkBox3.setEnabled(false);
+                    checkBox4.setEnabled(false);
+                    checkBox1.setEnabled(false);
+                } else {
+                    checkBox2.setEnabled(true);
+                    checkBox3.setEnabled(true);
+                    checkBox4.setEnabled(true);
+                    checkBox1.setEnabled(true);
+                }
+            }
+        });
+
+        Button btn_done = (Button) dialogView.findViewById(R.id.btn_done_dialog_select_folder);
+        btn_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkBox1.isChecked() || checkBox2.isChecked() || checkBox3.isChecked() ||
+                        checkBox4.isChecked() || checkBox5.isChecked()) {
+
+                    Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Still Not check!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 
     public void getWidgets() {
         viewPagerHome = (ViewPager) findViewById(R.id.view_pager_home);
