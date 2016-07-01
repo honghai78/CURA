@@ -1,43 +1,46 @@
 package com.example.haitran.cura.activities;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.hardware.Camera.PictureCallback;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Surface;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import com.example.haitran.cura.fragments.CameraFragment;
-import com.example.haitran.cura.others.CameraPreview;
-import com.example.haitran.cura.others.PhotoHandler;
+import com.example.haitran.cura.fragments.Camera2BasicFragment;
 import com.example.haitran.cura.R;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        Fragment frag = new CameraFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_main, frag).commit();
+        if (null == savedInstanceState) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragment_main, Camera2BasicFragment.newInstance(), "B")
+                    .commit();
+        }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+//                 getView().setFocusableInTouchMode(true);
+
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
+                android.app.Fragment fragment1 = getFragmentManager().findFragmentByTag("B");
+                if (fragment != null) {
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    //fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                    fragmentTransaction.remove(fragment).commit();
+                    getSupportActionBar().hide();
+                }
+                if (fragment1 != null)
+                    fragment1.onResume();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

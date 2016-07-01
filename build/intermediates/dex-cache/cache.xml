@@ -1,3 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_f2bd72d0253e985d4232c64608d93bf30b683f88\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="12b7d50164f6b38331046e74683e11571157da8a">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d622eecaed4d7251d1d3f1ff01dadbf59473b5b2\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.0.1_a03236637c83910c997ee88810e748f7112d4710\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_b7399ce0a1398e8a39e3003ccf29915631322ae6\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8813bdcf7583107c4873150075d17c8072ec50cf">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.3.0_63c1dbe7e8049c89ced20ec80322125872e5d3d2\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_74ba5753fa87edebfe96d899f08c095038f4f151\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_6b001bdc56365a3ef5119c1d2234b294b339fb95\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a809555a2599054c3dcd1bf82b089315ac3a11df">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-23.3.0_8d383c2f3e13c51953bd72e6ec62b12a7aca9eb1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_469b4ae7bf3ceeeb700df45f977a40767c6594eb\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="94a658060cb8c9581de8caa1ee15036dfda9d448">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_7ed69f229036b6e27ad2b5ed7bf95e361f9276b0\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\hai.tran\Desktop\New folder (3)\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_be928e715bcb69bbfb2f81c4bb4b955a2e659ba1\classes.dex" />
+    </item>
+
+</items>
