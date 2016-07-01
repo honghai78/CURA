@@ -25,16 +25,33 @@ import java.util.List;
  */
 public class RegisteredPatientFragment extends Fragment {
 
+    private String mTitleFragment;
+    private int page;
+
     private TextView mTxtDateCurrent, mTxtCountPatient;
     private RecyclerView recycler_patient;
-
     private RegisteredPatientAdapter adapter;
     private List<Patient> registeredPatientList;
 
-
     private int countRegisteredPatient;
 
+    public static RegisteredPatientFragment newInstance(int page, String mTitleFragment) {
+        RegisteredPatientFragment frg = new RegisteredPatientFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("someInt", page);
+        bundle.putString("someTitle", mTitleFragment);
+        frg.setArguments(bundle);
+        return frg;
+    }
+
     public RegisteredPatientFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        page = getArguments().getInt("someInt", 0);
+        mTitleFragment = getArguments().getString("someTitle");
     }
 
     @Override
@@ -71,5 +88,11 @@ public class RegisteredPatientFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recycler_patient.setLayoutManager(mLayoutManager);
         recycler_patient.setAdapter(adapter);
+    }
+
+    public void reload_list() {
+        registeredPatientList = ((HomeActivity)getActivity()).getRegisteredPatientList();
+        adapter.notifyDataSetChanged();
+        mTxtCountPatient.setText(registeredPatientList.size() + "");
     }
 }

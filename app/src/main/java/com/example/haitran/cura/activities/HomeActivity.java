@@ -1,5 +1,7 @@
 package com.example.haitran.cura.activities;
 
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.adapters.HomePagerAdapter;
 import com.example.haitran.cura.data.MyData;
 import com.example.haitran.cura.fragments.InQueueFragment;
 import com.example.haitran.cura.fragments.RegisteredPatientFragment;
@@ -20,17 +25,15 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView  mTxtCountRegistered, mTxtCountQueue,
-            mTxtBgRegistered, mTxtBgQueue;
-    private LinearLayout linear_registered, linear_queue;
-
-    private boolean isRegistered;
-
+    private HomePagerAdapter homePagerAdapter;
+    private ViewPager viewPagerHome;
+    private PagerSlidingTabStrip pagerTabStripHome;
 
     private Patient patientSelected;
     private List<Patient> registeredPatientList;
     private List<Patient> patientsInQueueList;
     private MyData data;
+    private String[] mTitlesOfTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,37 +51,32 @@ public class HomeActivity extends AppCompatActivity {
 
         //Get data from MyData
         registeredPatientList = data.getRegisteredPatientList();
-        patientsInQueueList = data.getPatientListInQueue();
-        patientsInQueueList = data.sortPatientByTimeInQueue(patientsInQueueList);
+        patientsInQueueList = data.sortPatientByTimeInQueue(data.getPatientListInQueue());
 
-        RegisteredPatientFragment registeredPatientFragment = new RegisteredPatientFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.content_fragment, registeredPatientFragment).commit();
-        isRegistered = true;
+        mTitlesOfTab = new String[]{"Registered (" + registeredPatientList.size() + ")", "In Queue (" + patientsInQueueList.size() + ")"};
+        homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mTitlesOfTab);
+        viewPagerHome.setAdapter(homePagerAdapter);
+        viewPagerHome.setPageTransformer(true, new RotateUpTransformer());
 
-        mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
-        mTxtCountQueue.setText("(" + patientsInQueueList.size() + ")");
+        pagerTabStripHome.setAllCaps(false);
+        pagerTabStripHome.setViewPager(viewPagerHome);
 
-        linear_registered.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registeredClick();
-            }
-        });
 
-        linear_queue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                inQueueClick();
-            }
-        });
     }
 
-    public void reload(){
+    public void reload() {
         registeredPatientList = data.getRegisteredPatientList();
         patientsInQueueList = data.sortPatientByTimeInQueue(data.getPatientListInQueue());
 
-        mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
-        mTxtCountQueue.setText("(" + patientsInQueueList.size() + ")");
+        mTitlesOfTab = new String[]{"Registered\n (" + registeredPatientList.size() + ")", "In Queue\n (" + patientsInQueueList.size() + ")"};
+//        homePagerAdapter.setTitles(mTitlesOfTab);
+//        homePagerAdapter.notifyDataSetChanged();
+        homePagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), mTitlesOfTab);
+        viewPagerHome.setAdapter(homePagerAdapter);
+        viewPagerHome.setPageTransformer(true, new RotateUpTransformer());
+
+        pagerTabStripHome.setAllCaps(false);
+        pagerTabStripHome.setViewPager(viewPagerHome);
     }
 
     @Override
@@ -90,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.menu_search:
                 Toast.makeText(getBaseContext(), "Search clicked", Toast.LENGTH_SHORT).show();
                 break;
@@ -102,35 +100,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void getWidgets() {
-        mTxtCountRegistered = (TextView) findViewById(R.id.txt_count_registered_home);
-        mTxtBgRegistered = (TextView) findViewById(R.id.txt_bg_registered_home);
-        mTxtCountQueue = (TextView) findViewById(R.id.txt_count_queue_home);
-        mTxtBgQueue = (TextView) findViewById(R.id.txt_bg_queue_home);
-
-        linear_queue = (LinearLayout) findViewById(R.id.linear_in_queue_home);
-        linear_registered = (LinearLayout) findViewById(R.id.linear_register_home);
-    }
-
-    public void registeredClick() {
-        mTxtBgRegistered.setBackgroundResource(R.color.colorPrimary);
-        mTxtBgQueue.setBackgroundResource(android.R.color.transparent);
-
-        if (!isRegistered) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, new RegisteredPatientFragment()).commit();
-            isRegistered = true;
-        }
-        Toast.makeText(this, "Registered click", Toast.LENGTH_SHORT).show();
-    }
-
-    public void inQueueClick() {
-        mTxtBgQueue.setBackgroundResource(R.color.colorPrimary);
-        mTxtBgRegistered.setBackgroundResource(android.R.color.transparent);
-
-        if (isRegistered) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_fragment, new InQueueFragment()).commit();
-            isRegistered = false;
-        }
-        Toast.makeText(this, "In Queue click", Toast.LENGTH_SHORT).show();
+        viewPagerHome = (ViewPager) findViewById(R.id.view_pager_home);
+        pagerTabStripHome = (PagerSlidingTabStrip) findViewById(R.id.pager_tab_strip_home);
     }
 
     public void setPatientSelected(Patient patientSelected) {
@@ -141,23 +112,22 @@ public class HomeActivity extends AppCompatActivity {
         return patientSelected;
     }
 
-    public void updateRegisteredPatient(int num){
+    public void updateRegisteredPatient(int num) {
         addPatientInQueue();
         removeRegisteredPatient(num);
 
         reload();
-        inQueueClick();
     }
 
-    public void addPatientInQueue(){
+    public void addPatientInQueue() {
         data.addPatientInQueue(getPatientSelected());
     }
 
-    public void removeRegisteredPatient(int position){
+    public void removeRegisteredPatient(int position) {
         data.removeRegisteredPatient(position);
     }
 
-    public List<Patient> getPatientsInQueueList(){
+    public List<Patient> getPatientsInQueueList() {
         return data.sortPatientByTimeInQueue(data.getPatientListInQueue());
     }
 

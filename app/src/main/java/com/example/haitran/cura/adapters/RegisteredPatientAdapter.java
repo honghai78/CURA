@@ -9,9 +9,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.activities.HomeActivity;
@@ -19,6 +22,7 @@ import com.example.haitran.cura.fragments.RegisteredPatientFragment;
 import com.example.haitran.cura.models.Patient;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -72,17 +76,39 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
                 final TimePickerDialog tpd = new TimePickerDialog(new ContextThemeWrapper(mContext, R.style.TimePicker), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if (hourOfDay < 10 && minute < 10) {
-                            time = "0" + hourOfDay + ":0" + minute;
-                        } else if (hourOfDay < 10) {
-                            time = "0" + hourOfDay + ":" + minute;
-                        } else if (minute < 10) {
-                            time = hourOfDay + ":0" + minute;
+                        if (hourOfDay >= cal.get(Calendar.HOUR_OF_DAY) && minute >= cal.get(Calendar.MINUTE)) {
+                            if (hourOfDay < 10 && minute < 10) {
+                                time = "0" + hourOfDay + ":0" + minute;
+                            } else if (hourOfDay < 10) {
+                                time = "0" + hourOfDay + ":" + minute;
+                            } else if (minute < 10) {
+                                time = hourOfDay + ":0" + minute;
+                            } else {
+                                time = hourOfDay + ":" + minute;
+                            }
+
+                            List<Patient> patients = new ArrayList<>();
+                            if (mContext instanceof HomeActivity) {
+                                patients = ((HomeActivity) mContext).getPatientsInQueueList();
+                            }
+                            boolean check = false;
+                            for (int i = 0; i < patients.size(); i++) {
+                                Patient pat = patients.get(i);
+                                if (pat.getName().equals(pat.getName()) && pat.getTimeArrival().equals(time)) {
+                                    check = true;
+                                    break;
+                                }
+                            }
+                            if (check) {
+                                Toast.makeText(mContext, "Chose time was duplicate", Toast.LENGTH_SHORT).show();
+                            } else {
+                                patient.setTimeArrival(time);
+                                setArrivalTime(patient, position);
+                            }
+
                         } else {
-                            time = hourOfDay + ":" + minute;
+                            Toast.makeText(mContext, "You must chose time larger or equal current time", Toast.LENGTH_LONG).show();
                         }
-                        patient.setTimeArrival(time);
-                        setArrivalTime(patient, position);
                     }
                 }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
 
@@ -104,12 +130,28 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
                 holder.img_set_arrival_time.performClick();
             }
         });
+
+        setFadeAnimation(holder.itemView);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(MyViewHolder holder) {
+//        super.onViewDetachedFromWindow(holder);
+        holder.clearAnimation();
+    }
+
+    //Set animation for view
+    private void setFadeAnimation(View view) {
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(500);
+        view.startAnimation(anim);
     }
 
     public void setArrivalTime(Patient patient, int position) {
         if (mContext instanceof HomeActivity) {
             ((HomeActivity) mContext).setPatientSelected(patient);     //Sent patient to In Queue
             ((HomeActivity) mContext).updateRegisteredPatient(position);
+            registeredFragment.reload_list();
         }
     }
 
@@ -127,11 +169,12 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
 
         public TextView txt_id_patient, txt_name_patient, txt_age_patient, txt_gender_patient,
                 txt_code_patient, txt_name_doctor, txt_count_visit, txt_arrival_time;
-
+        public View mView;
         public ImageView img_patient, img_set_arrival_time;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            mView = itemView;
             txt_id_patient = (TextView) itemView.findViewById(R.id.txt_id_patient_cv);
             txt_name_patient = (TextView) itemView.findViewById(R.id.txt_name_patient_cv);
             txt_age_patient = (TextView) itemView.findViewById(R.id.txt_age_patient_cv);
@@ -144,6 +187,11 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
             img_set_arrival_time = (ImageView) itemView.findViewById(R.id.img_set_arrival_time_cv);
 
             txt_arrival_time = (TextView) itemView.findViewById(R.id.txt_arrival_time_cv);
+        }
+
+        public void clearAnimation()
+        {
+            mView.clearAnimation();
         }
     }
 }

@@ -27,28 +27,34 @@ import java.util.List;
  */
 public class InQueueFragment extends Fragment {
 
+    private String mTitleFragment;
+    private int page;
+
     private TextView mTxtSelectedDoctor;
     private Spinner mSpinSelectDoctor;
-
     private RecyclerView recyclerView_In_Queue;
     private InQueueAdapter adapter_In_Queue;
-
     private List<Patient> patientsInQueueList = new ArrayList<>();
-
-//    private List<Patient> patientList = new ArrayList<Patient>() {{
-//        add(new Patient("10000" + 0, "abc 1", 77, "000000000" + 0, 0, "Tom", 1, null));
-//        add(new Patient("10000" + 1, "abc 2", 89, "000000000" + 1, 1, "Jerry", 0, null));
-//        add(new Patient("10000" + 2, "abc 3", 77, "000000000" + 2, 0, "Jenifer", 2, null));
-//        add(new Patient("10000" + 3, "abc 4", 27, "000000000" + 3, 0, "Peter", 1, null));
-//        add(new Patient("10000" + 4, "abc 5", 19, "000000000" + 4, 1, "Jerry", 0, null));
-//        add(new Patient("10000" + 5, "abc 6", 47, "000000000" + 5, 0, "Tom", 2, null));
-//    }};
-
     private List<Patient> patientsByDoctor = new ArrayList<>();
 
     public InQueueFragment() {
     }
 
+    public static InQueueFragment newInstance(int page, String mTitleFragment) {
+        InQueueFragment frg = new InQueueFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("someInt", page);
+        bundle.putString("someTitle", mTitleFragment);
+        frg.setArguments(bundle);
+        return frg;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        page = getArguments().getInt("someInt",0);
+        mTitleFragment = getArguments().getString("someTitle");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +68,7 @@ public class InQueueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getWidget(view);
 
-        patientsInQueueList = ((HomeActivity)getActivity()).getPatientsInQueueList();
+        patientsInQueueList = ((HomeActivity) getActivity()).getPatientsInQueueList();
 
         mSpinSelectDoctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

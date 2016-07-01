@@ -5,11 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haitran.cura.R;
-import com.example.haitran.cura.activities.HomeActivity;
 import com.example.haitran.cura.models.Patient;
 
 import java.util.List;
@@ -50,12 +51,25 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
         holder.txt_count_visit.setText(patient.getNumOfExam() + "");
         holder.txt_age_patient.setText(patient.getAge() + "");
 
-        int[] times = seperateTime(patient.getTimeArrival());
+        int[] times = separateTime(patient.getTimeArrival());
         if (times[0] >= 12) {
             holder.txt_arrival_time.setText(patient.getTimeArrival() + " pm");
         } else {
             holder.txt_arrival_time.setText(patient.getTimeArrival() + " am");
         }
+
+        setFadeAnimation(holder.itemView);
+    }
+
+    private void setFadeAnimation(View view) {
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(500);
+        view.startAnimation(anim);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(MyViewHolder holder) {
+        holder.clearAnimation();
     }
 
     @Override
@@ -68,9 +82,11 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
                 txt_code_patient, txt_count_visit, txt_arrival_time;
 
         public ImageView img_patient;
+        public View mView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            mView = itemView;
             txt_id_patient = (TextView) itemView.findViewById(R.id.txt_id_patient_cv_iq);
             txt_name_patient = (TextView) itemView.findViewById(R.id.txt_name_patient_cv_iq);
             txt_age_patient = (TextView) itemView.findViewById(R.id.txt_age_patient_cv_iq);
@@ -80,9 +96,14 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
             img_patient = (ImageView) itemView.findViewById(R.id.img_patient_cv_iq);
             txt_arrival_time = (TextView) itemView.findViewById(R.id.txt_arrival_time_cv_iq);
         }
+
+        public void clearAnimation()
+        {
+            mView.clearAnimation();
+        }
     }
 
-    public int[] seperateTime(String time) {
+    public int[] separateTime(String time) {
         String[] values = time.split(":");
         return new int[]{Integer.parseInt(values[0]), Integer.parseInt(values[1])};
     }
