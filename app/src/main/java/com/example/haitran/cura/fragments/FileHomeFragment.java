@@ -2,6 +2,7 @@ package com.example.haitran.cura.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,8 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.activities.CameraActivity;
 import com.example.haitran.cura.views.adapters.RecyclerFileHomeAdapter;
 import com.example.haitran.cura.views.adapters.RecyclerPatientDetailAdapter;
+import com.software.shell.fab.ActionButton;
 import com.software.shell.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -42,13 +45,15 @@ public class FileHomeFragment extends Fragment {
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         View view =inflater.inflate(R.layout.fragment_file_home,container,false);
-      //  FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.action_button);
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        ActionButton floatingActionButton = (ActionButton) view.findViewById(R.id.action_button);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CameraActivity.class);
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            }
+        });
         return view;
     }
 

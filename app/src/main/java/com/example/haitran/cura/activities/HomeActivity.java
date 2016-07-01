@@ -1,5 +1,6 @@
 package com.example.haitran.cura.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.fragments.FileHomeFragment;
 import com.example.haitran.cura.fragments.PatientSummaryFragment;
 import com.example.haitran.cura.fragments.SiginFragmentMain;
 
@@ -18,9 +20,24 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Intent intent = getIntent();
+
+            int i = (int)intent.getIntExtra("CAMERA",0);
+            if (i==1){
+                Fragment frag = new PatientSummaryFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.add(R.id.layout_home, frag).commit();
+                Fragment frag1 = new FileHomeFragment();
+                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction1.add(R.id.layout_home, frag1,"PAGE_FILE_HOME").commit();
+            }
+
+        else {
         Fragment frag = new PatientSummaryFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.layout_home, frag).commit();
+        }
+
     }
 
     @Override
