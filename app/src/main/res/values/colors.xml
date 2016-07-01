@@ -2,12 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorBackgroundCamera">#ff0d00</color>
-    <color name="colorRed">#ff0000</color>
-    <color name="colorOrange">#ff9c33</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorYellow">#ffff00</color>
+    <color name="colorAccent">#FF0000</color>
     <color name="colorAccentRe">#FF4081</color>
     <color name="bgInputDigit">#DDDDDD</color>
     <color name="bgCellInputDigit">#BBBBBB</color>
