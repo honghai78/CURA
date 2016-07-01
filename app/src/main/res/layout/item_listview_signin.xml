@@ -53,7 +53,6 @@
                     android:textStyle="bold"
                     android:id="@+id/signin_textSub"
                     />
-
             </LinearLayout>
         </LinearLayout>
 

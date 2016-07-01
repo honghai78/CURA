@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,9 @@ import android.widget.Toast;
 import com.example.haitran.cura.KeyBoardEffect;
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.activities.HomeActivity;
-import com.example.haitran.cura.activities.SplashActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kha.phan on 6/28/2016.
@@ -27,11 +29,13 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
     private String educatorName;
     private TextView mTextHello;
     private TextView mDigitFirst, mDigitSecond, mDigitThird,mDigitFourth;
+    private List<TextView> mListDigitInput;
     private TextView mKey_1, mKey_2, mKey_3, mKey_4, mKey_5, mKey_6,
             mKey_7, mKey_8, mKey_9, mKey_0;
     private View mLayout;
     private TextView mResendCode,mKeyClear, mKeyTick;
-    private String mDigitInput = "";
+    private int[] mDigitInput = {-1,-1,-1,-1};
+    private int mTextDigitSelected = 1;
     private Toast mToast;
     private KeyBoardEffect mKeyBoardEffect;
 
@@ -57,6 +61,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         getWidgets(view);
         addEvent();
         addEffectKeyBoard();
+        changeBgTextViewSelected(mTextDigitSelected);
         if (educatorName!=null) mTextHello.setText(mTextHello.getText() + " "+educatorName +",");
         else mTextHello.setText(mTextHello.getText() + " Mrs.Kha" +",");
     }
@@ -74,6 +79,11 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         mDigitSecond = (TextView) view.findViewById(R.id.text_digit_second);
         mDigitThird = (TextView) view.findViewById(R.id.text_digit_third);
         mDigitFourth = (TextView) view.findViewById(R.id.text_digit_fourth);
+        mListDigitInput = new ArrayList<TextView>();
+        mListDigitInput.add(mDigitFirst);
+        mListDigitInput.add(mDigitSecond);
+        mListDigitInput.add(mDigitThird);
+        mListDigitInput.add(mDigitFourth);
         mKey_0 = (TextView) view.findViewById(R.id.text_keyboard_0);
         mKey_1 = (TextView) view.findViewById(R.id.text_keyboard_1);
         mKey_2 = (TextView) view.findViewById(R.id.text_keyboard_2);
@@ -105,6 +115,43 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
 
     }
     private void addEvent(){
+        mDigitFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mDigitFirst.setText("");
+                mTextDigitSelected = 1;
+                mDigitInput[mTextDigitSelected-1]=-1;
+                changeBgTextViewSelected(mTextDigitSelected);
+            }
+        });
+        mDigitSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDigitSecond.setText("");
+                mTextDigitSelected = 2;
+                mDigitInput[mTextDigitSelected-1]=-1;
+                changeBgTextViewSelected(mTextDigitSelected);
+            }
+        });
+        mDigitThird.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDigitThird.setText("");
+                mTextDigitSelected = 3;
+                mDigitInput[mTextDigitSelected-1]=-1;
+                changeBgTextViewSelected(mTextDigitSelected);
+            }
+        });
+        mDigitFourth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDigitFourth.setText("");
+                mTextDigitSelected = 4;
+                mDigitInput[mTextDigitSelected-1]=-1;
+                changeBgTextViewSelected(mTextDigitSelected);
+            }
+        });
         mKey_0.setOnClickListener(this);
         mKey_1.setOnClickListener(this);
         mKey_2.setOnClickListener(this);
@@ -140,9 +187,154 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         });
 
     }
+    private void changeBgTextViewSelected(int textDigitSelected){
+        for (int i =0; i<mListDigitInput.size(); i++){
+            int index = i+1;
+            if (index == textDigitSelected) {
+                mListDigitInput.get(i).setBackgroundResource(R.drawable.bg_textview_selected);
+            }
+            else mListDigitInput.get(i).setBackgroundResource(R.drawable.bg_dashed_line);
+        }
 
+    }
 
+    private void inputDigit(int i) {
+        if (lengthDigitInput()==4) {
+            Toast.makeText(getActivity(),"You are typed enough 4 digit",Toast.LENGTH_SHORT).show();
+        }
+        switch (mTextDigitSelected){
+            case 1:
+                mDigitInput[0] = i;
+                mDigitFirst.setText("*");
+                mTextDigitSelected = nextInput();
+                changeBgTextViewSelected(mTextDigitSelected);
+                break;
+            case 2:
+                mDigitInput[1] = i;
+                mDigitSecond.setText("*");
+                mTextDigitSelected= nextInput();
+                changeBgTextViewSelected(mTextDigitSelected);
+                break;
+            case 3:
+                mDigitInput[2] = i;
+                mDigitThird.setText("*");
+                mTextDigitSelected= nextInput();
+                changeBgTextViewSelected(mTextDigitSelected);
+                break;
+            case 4:
+                mDigitInput[3] = i;
+                mDigitFourth.setText("*");
+                mTextDigitSelected= nextInput();
+                Log.d("+++backInput", ",Input: +" + mTextDigitSelected);
+                changeBgTextViewSelected(mTextDigitSelected);
+                break;
+        }
+    }
+    private void clearDigitInput(){
+        if(mTextDigitSelected==1){
+            mToast.setText("You still not type any number yet");
+            mToast.show();
+            return;
+        }
+        if(mTextDigitSelected == 5){
+            mTextDigitSelected =4;
 
+        }
+        else {
+            mTextDigitSelected = backInput();
+        }
+        mDigitInput[mTextDigitSelected-1] = -1;
+        mListDigitInput.get(mTextDigitSelected-1).setText("");
+        changeBgTextViewSelected(mTextDigitSelected);
+
+    }
+    private void logIn() {
+        if (lengthDigitInput()<4){
+            mToast.setText("Please input 4 digit for login");
+            mToast.show();
+            return;
+        }
+        String passInput ="";
+        for(int code: mDigitInput){
+            passInput += code;
+        }
+        if(checkPassCode(passInput,"2016")){
+            Intent intent = new Intent(getActivity(),HomeActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+        else {
+            reInput();
+        }
+
+    }
+    private int lengthDigitInput(){
+        int length = 0;
+        for (int digit : mDigitInput){
+            if(digit >=0) length ++;
+        }
+        return length;
+    }
+    private int nextInput(){
+        int index = 5;
+        for(int i = mTextDigitSelected-1; i< mDigitInput.length ; i++) {
+            if (mDigitInput[i]<0) return i+1;
+        }
+        for(int i=0; i<mTextDigitSelected-1;i++){
+            if (mDigitInput[i]<0) return i+1;
+        }
+        return index;
+    }
+    private int backInput(){
+        int index = 1;
+        Log.d("+++backInput", ",TextDigitSelected: +" + mTextDigitSelected);
+        for(int i = mTextDigitSelected-1; i>=0 ; i--) {
+            if (mDigitInput[i]>=0) return i+1;
+        }
+        for (int i = mDigitInput.length-1; i>mTextDigitSelected-1; i-- ){
+            if (mDigitInput[i]>=0) return i+1;
+        }
+        return index;
+
+    }
+    private void reInput() {
+        for(int i=0; i<mDigitInput.length;i++){
+            mDigitInput[i]=-1;
+        }
+        mTextDigitSelected= 1;
+        changeBgTextViewSelected(mTextDigitSelected);
+        mDigitFirst.setText("");
+        mDigitSecond.setText("");
+        mDigitThird.setText("");
+        mDigitFourth.setText("");
+    }
+
+    private boolean checkPassCode(String digitInput, String pass){
+        if(digitInput.equals(pass)) return true;
+        return false;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_2");
+                    if (fragment != null) {
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                        fragmentTransaction.remove(fragment).commit();
+                        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         String tittle = ((TextView) v).getText().toString();
@@ -178,113 +370,5 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
                 inputDigit(0);
                 break;
         }
-    }
-
-    private void inputDigit(int i) {
-        int lengthPassCode = mDigitInput.length();
-        switch (lengthPassCode){
-            case 0:
-                mDigitInput +=i;
-                mDigitFirst.setText("*");
-                break;
-            case 1:
-                mDigitInput +=i;
-                mDigitSecond.setText("*");
-                break;
-            case 2:
-                mDigitInput +=i;
-                mDigitThird.setText("*");
-                break;
-            case 3:
-                mDigitInput +=i;
-                mDigitFourth.setText("*");
-                break;
-            case 4:
-                mToast.setText("You are typed enough 4 digit");
-                mToast.show();
-                //Toast.makeText(getActivity(),"You are typed enough 4 digit",Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void clearDigitInput(){
-        int lengthPassCode = mDigitInput.length();
-        switch (lengthPassCode) {
-            case 0:
-                mToast.setText("You still not type any digit yet");
-                mToast.show();
-                //Toast.makeText(getActivity(), "You still not type any digit yet", Toast.LENGTH_SHORT).show();
-                break;
-            case 1:
-                mDigitInput = "";
-                mDigitFirst.setText("");
-                break;
-            case 2:
-                mDigitInput = mDigitInput.substring(0, lengthPassCode - 1);
-                mDigitSecond.setText("");
-                break;
-            case 3:
-                mDigitInput = mDigitInput.substring(0, lengthPassCode - 1);
-                mDigitThird.setText("");
-                break;
-            case 4:
-                mDigitInput = mDigitInput.substring(0, lengthPassCode - 1);
-                mDigitFourth.setText("");
-                break;
-        }
-    }
-    private void logIn() {
-        if (mDigitInput.length()<4) {
-            mToast.setText("You need 4 digit for log in");
-            mToast.show();
-            //Toast.makeText(getActivity(),"You need 4 digit for log in",Toast.LENGTH_SHORT);
-        }
-        if(checkPassCode(mDigitInput,"2016")){
-            Intent intent = new Intent(getActivity(),HomeActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-            mToast.setText("Log in success");
-            mToast.show();
-           // Toast.makeText(getActivity(),"Log in success",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            mToast.setText("Log in fail");
-            mToast.show();
-            //Toast.makeText(getActivity(),"Log in fail",Toast.LENGTH_SHORT).show();
-            reInput();
-        }
-    }
-
-    private void reInput() {
-        mDigitInput = "";
-        mDigitFirst.setText("");
-        mDigitSecond.setText("");
-        mDigitThird.setText("");
-        mDigitFourth.setText("");
-    }
-
-    private boolean checkPassCode(String digitInput, String pass){
-        if(digitInput.equals(pass)) return true;
-        return false;
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_2");
-                    if (fragment != null) {
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                        fragmentTransaction.remove(fragment).commit();
-                        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
     }
 }
