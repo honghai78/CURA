@@ -97,6 +97,13 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
                 tpd.show();
             }
         });
+
+        holder.txt_arrival_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.img_set_arrival_time.performClick();
+            }
+        });
     }
 
     public void setArrivalTime(Patient patient, int position) {

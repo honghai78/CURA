@@ -48,8 +48,8 @@ public class HomeActivity extends AppCompatActivity {
 
         //Get data from MyData
         registeredPatientList = data.getRegisteredPatientList();
-//        patientsInQueueList = data.getPatientsInQueueList();
-        patientsInQueueList = data.sortPatientByTimeInQueue();
+        patientsInQueueList = data.getPatientListInQueue();
+        patientsInQueueList = data.sortPatientByTimeInQueue(patientsInQueueList);
 
         RegisteredPatientFragment registeredPatientFragment = new RegisteredPatientFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.content_fragment, registeredPatientFragment).commit();
@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void reload(){
         registeredPatientList = data.getRegisteredPatientList();
-        patientsInQueueList = data.sortPatientByTimeInQueue();
+        patientsInQueueList = data.sortPatientByTimeInQueue(data.getPatientListInQueue());
 
         mTxtCountRegistered.setText("(" + registeredPatientList.size() + ")");
         mTxtCountQueue.setText("(" + patientsInQueueList.size() + ")");
@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public List<Patient> getPatientsInQueueList(){
-        return data.getPatientListInQueue();
+        return data.sortPatientByTimeInQueue(data.getPatientListInQueue());
     }
 
     public List<Patient> getRegisteredPatientList() {
