@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.views.adapters.RecyclerFileHomeAdapter;
 import com.example.haitran.cura.views.adapters.RecyclerPatientDetailAdapter;
+import com.software.shell.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,15 @@ public class FileHomeFragment extends Fragment {
         appCompatActivity.getSupportActionBar().setSubtitle(null);
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        return inflater.inflate(R.layout.fragment_patient_summary,container,false);
+        View view =inflater.inflate(R.layout.fragment_file_home,container,false);
+      //  FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.action_button);
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        return view;
     }
 
     @Override
@@ -61,7 +70,7 @@ public class FileHomeFragment extends Fragment {
         mList.add("Physical Exam");
         mList.add("In patient Note");
         mList.add("Medicines");
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_patient_detail);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_file_home);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager()
                 .getDefaultDisplay()
