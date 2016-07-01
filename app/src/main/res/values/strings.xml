@@ -18,5 +18,11 @@
     <string name="in_patient_notes">In Patient Notes</string>
     <string name="medicines">Medicines</string>
     <string name="done">Done</string>
-
+    <string-array name="array_folder">
+        <item>External Labs</item>
+        <item>Sugar Logbook</item>
+        <item>Physical Exam</item>
+        <item>In Patient Notes</item>
+        <item>Medicines</item>
+    </string-array>
 </resources>
