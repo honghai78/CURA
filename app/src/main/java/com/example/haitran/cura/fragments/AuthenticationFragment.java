@@ -231,7 +231,7 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
         }
     }
     private void clearDigitInput(){
-        if(mTextDigitSelected==1){
+        if(mTextDigitSelected==1&&lengthDigitInput()==0){
             mToast.setText("You still not type any number yet");
             mToast.show();
             return;
