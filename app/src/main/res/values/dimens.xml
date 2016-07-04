@@ -5,5 +5,6 @@
     <dimen name="fragment_authen_text_size">15dp</dimen>
     <dimen name="key_code_size">40dp</dimen>
     <dimen name="digit_input_size">20dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="padding_top_card_view">4dp</dimen>
+    <dimen name="padding_bottom_card_view">4dp</dimen>
 </resources>

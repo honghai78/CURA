@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="7"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:weightSum="6"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="6"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/select_folder"
+            android:textColor="@color/black"
+
+            android:textSize="30dp" />
+
+        <CheckBox
+            android:id="@+id/chk_external_labs"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/external_labs" />
+
+        <CheckBox
+            android:id="@+id/chk_sugar_logbook"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/sugar_logbook" />
+
+        <CheckBox
+            android:id="@+id/chk_physical_exam"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/physical_exam" />
+
+        <CheckBox
+            android:id="@+id/chk_in_patient_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/in_patient_notes" />
+
+        <CheckBox
+            android:id="@+id/chk_medicines"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/medicines" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/btn_done_dialog_select_folder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/done"
+            android:textColor="@color/colorRed" />
+    </LinearLayout>
+
+</LinearLayout>
