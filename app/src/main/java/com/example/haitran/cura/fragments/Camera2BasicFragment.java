@@ -24,6 +24,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
@@ -64,6 +65,7 @@ import android.widget.Toast;
 
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.activities.CameraActivity;
+import com.example.haitran.cura.activities.HomeActivity;
 
 import java.io.File;
 import java.nio.ByteBuffer;
@@ -445,6 +447,7 @@ public class Camera2BasicFragment extends Fragment
         mTextureView = (TextureView) view.findViewById(R.id.texture);
         appCompatActivity =(AppCompatActivity) getActivity();
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        view.findViewById(R.id.imageView).setOnClickListener(this);
         flash=(ImageView) view.findViewById(R.id.imageView2);
         flash.setOnClickListener(this);
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
@@ -943,6 +946,13 @@ public class Camera2BasicFragment extends Fragment
                         Toast.makeText(getActivity(), "off to auto", Toast.LENGTH_SHORT).show();
                         break;
                 }
+                break;
+            }
+            case R.id.imageView: {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.putExtra("CAMERA", 1);
+                startActivity(intent);
+                getActivity().finish();
                 break;
             }
             }
