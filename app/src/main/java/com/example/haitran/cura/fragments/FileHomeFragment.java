@@ -71,7 +71,7 @@ public class FileHomeFragment extends Fragment {
         });
         mList = new ArrayList<String>();
         mList.add("Sugar Logbook");
-        mList.add("External Logbook");
+        mList.add("External Labs");
         mList.add("Physical Exam");
         mList.add("In patient Note");
         mList.add("Medicines");

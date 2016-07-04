@@ -1,6 +1,7 @@
 package com.example.haitran.cura.views.adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.fragments.FileFolderFragment;
 
 import java.util.List;
 
@@ -63,10 +65,36 @@ public class RecyclerFileHomeAdapter extends RecyclerView.Adapter<RecyclerFileHo
             view.getLayoutParams().height= height/5;
             view.requestLayout();
         }
-        public void setData(String detail){
+        public void setData(final String detail){
             textFolder.setText(detail);
             imageFolder.setBackgroundResource(R.drawable.ic_image_folder);
 
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FileFolderFragment fragment = new FileFolderFragment();
+                    fragment.setSubtitle(getSubTitle(detail));
+                    FragmentTransaction fragmentTransaction = mAppCompatActivity.getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.transition.slide_in, R.transition.slide_out);
+                    fragmentTransaction.add(R.id.layout_home, fragment, "PAGE_FILE_FOLDER").commit();
+                }
+            });
         }
+        private String getSubTitle(String detail){
+            switch (detail){
+                case "Sugar Logbook":
+                    return "Logbook";
+                case "External Labs":
+                    return "Labs";
+                case "Physical Exam":
+                    return "Exam";
+                case "In patient Note":
+                    return "Note";
+                case "Medicines":
+                    return "Medicines";
+            }
+            return null;
+        }
+
     }
 }

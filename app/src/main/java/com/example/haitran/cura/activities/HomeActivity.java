@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.fragments.FileFolderFragment;
 import com.example.haitran.cura.fragments.FileHomeFragment;
 import com.example.haitran.cura.fragments.PatientSummaryFragment;
 import com.example.haitran.cura.fragments.SiginFragmentMain;
@@ -22,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Intent intent = getIntent();
 
-            int i = (int)intent.getIntExtra("CAMERA",0);
+            int i = intent.getIntExtra("CAMERA",0);
             if (i==1){
                 Fragment frag = new PatientSummaryFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -30,6 +31,16 @@ public class HomeActivity extends AppCompatActivity {
                 Fragment frag1 = new FileHomeFragment();
                 FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction1.add(R.id.layout_home, frag1,"PAGE_FILE_HOME").commit();
+            }else if (i==2){
+                Fragment frag = new PatientSummaryFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.add(R.id.layout_home, frag).commit();
+                Fragment frag1 = new FileHomeFragment();
+                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction1.add(R.id.layout_home, frag1,"PAGE_FILE_HOME").commit();
+                Fragment frag2 = new FileFolderFragment();
+                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction2.add(R.id.layout_home, frag2,"PAGE_FILE_FOLDER").commit();
             }
 
         else {
@@ -52,6 +63,17 @@ public class HomeActivity extends AppCompatActivity {
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                     getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
                     Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_FILE_HOME");
+                    if (fragment != null) {
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                        fragmentTransaction.remove(fragment).commit();
+                    }
+                }else if(getSupportActionBar().getTitle().equals("Files :")){
+                    getSupportActionBar().setTitle("Files");
+                    getSupportActionBar().setSubtitle(null);
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+                    Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_FILE_FOLDER");
                     if (fragment != null) {
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
