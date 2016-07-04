@@ -2,130 +2,116 @@
 <items version="2" >
 
     <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_d6a7f10f4122cd4d27c0b21cf6562f907c211805\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-23.4.0_3a8ddc32a5be4faedccbc88fda2256e58148f102\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_8cc1c282c295040c674119681d7c68a1ea470a90\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_5380951c67b350c066baac0cc64a9428f6884af1\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="a809555a2599054c3dcd1bf82b089315ac3a11df">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-23.3.0_a511721f5604699e461b5cdc41c162a2ba13e96a\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_3bae39c1aa8ba11def484e25c1d32fbd223bd47f\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\hai.tran\.gradle\caches\modules-2\files-2.1\org.slf4j\slf4j-api\1.7.9\872ec63b41181e29ad5a3723f1417356e2d2c0f2\slf4j-api-1.7.9.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="872ec63b41181e29ad5a3723f1417356e2d2c0f2">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\slf4j-api-1.7.9_fe3490639cfb6f33ff8b1a1a99e42acf45c0fdc7\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="791a983a27020b61d638f98deb8578040eb4876c">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_675268071612d242e008c42ee4a080e4b0221edc\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\uitools\1.1.0\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="418307d960be5f7c5fe13794b7283f5fd09d0c17">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.shell-software-uitools-1.1.0_787d1461603b88491500414f0ebd3f9738949d86\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.astuetz\pagerslidingtabstrip\1.0.1\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="7912610ed96381c25c36d986eba422731b9641b6">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.astuetz-pagerslidingtabstrip-1.0.1_5cfe3178e0e80c174faf844a70c37486915c9398\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\libs\internal_impl-23.3.0.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="8813bdcf7583107c4873150075d17c8072ec50cf">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.3.0_c19aa98e8f0bf1361c7c291d2a24e0c93080f7f8\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\viewmover\1.1.0\jars\classes.jar"
-        jumboMode="true"
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\viewmover\1.1.0\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.3"
         sha1="3d6dc28c575755c91be7f6a69803e4ebe98c7c7d">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.shell-software-viewmover-1.1.0_98dac1f744ed9e5ac883c619250d04ab22739f39\classes.dex" />
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.github.shell-software-viewmover-1.1.0_4337da83bfd2468d72c1db7fde2124ab4a0cffb9.jar" />
     </item>
     <item
-        jar="E:\CURA\CURA\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\uitools\1.1.0\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.3"
-        sha1="2bfa4383317c74feb030c892b743b409636317c1">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_01ea0d54abecae812384833d49b64d9b801cfba2\classes.dex" />
+        sha1="418307d960be5f7c5fe13794b7283f5fd09d0c17">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.github.shell-software-uitools-1.1.0_a2bdd716f9c9232415246217cc0f24c32443a168.jar" />
     </item>
     <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="true"
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8813bdcf7583107c4873150075d17c8072ec50cf">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_454d26cf049501145507ae08255f12a9b4174ecd.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.3"
         sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_ee8b491362bc113bfc27b966c30e6e015a159fd6\classes.dex" />
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_020891eeec7a88e45888b1ba0770737cebb5cc0e.jar" />
     </item>
     <item
-        jar="C:\Users\hai.tran\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
-        jumboMode="true"
+        jar="C:\Users\kha.phan\.gradle\caches\modules-2\files-2.1\org.slf4j\slf4j-api\1.7.9\872ec63b41181e29ad5a3723f1417356e2d2c0f2\slf4j-api-1.7.9.jar"
+        jumboMode="false"
         revision="23.0.3"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_74ba5753fa87edebfe96d899f08c095038f4f151\classes.dex" />
+        sha1="872ec63b41181e29ad5a3723f1417356e2d2c0f2">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\slf4j-api-1.7.9_f2ad239b4ac2e3c27a8ac8c0caf8257a7e658e6c.jar" />
     </item>
     <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
-        jumboMode="true"
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.3"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_cfd7e93e1274ead8d768784e484f2ca8d86af634\classes.dex" />
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_f3d5aee0f54621de843bbcb7c578e77509562856.jar" />
     </item>
     <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\fab\1.1.2\jars\classes.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="48bbecbdd3ed42e9df1b94a945480838e3bb208b">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.shell-software-fab-1.1.2_973303e3bd7e7943ffd0edb53b93b68692f9d256\classes.dex" />
-    </item>
-    <item
-        jar="E:\CURA\CURA\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
-        jumboMode="true"
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
         revision="23.0.3"
         sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="E:\CURA\CURA\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_9c899f24a3fd7fa980bedea5f9accf5814577183\classes.dex" />
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_dcd308477e6ce65762a07a3e751e41116007f148.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-23.4.0_0a12b6776a575d253bd86dd30b05cc5babc29231.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.astuetz\pagerslidingtabstrip\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="7912610ed96381c25c36d986eba422731b9641b6">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.astuetz-pagerslidingtabstrip-1.0.1_a3d6882a5fc8269eb6c8e2d3fd33d79b032c4d79.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_249e564ebd4446daa32567eeac89494e75ac6ed8.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a809555a2599054c3dcd1bf82b089315ac3a11df">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-support-v13-23.3.0_6813e1a38123a8e9b05c94e6f875cd73d96bdc79.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.github.shell-software\fab\1.1.2\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="48bbecbdd3ed42e9df1b94a945480838e3bb208b">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.github.shell-software-fab-1.1.2_f6e0b8460c66692a7f9a5ceb4a3286b5bf8216be.jar" />
+    </item>
+    <item
+        jar="C:\Users\kha.phan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_ad83807cdcd5fb2fb388397554221867144dbd3b.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_9ae18059e3e649796e9e08e8d57cb54fcb46f938.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_ecc099f20043acc5b814fc60e9206c10fe84d419.jar" />
+    </item>
+    <item
+        jar="E:\Git4\CURA\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\Git4\CURA\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_66718041e0270b9e222e309770e9f69216155af9.jar" />
     </item>
 
 </items>

@@ -19,6 +19,7 @@ import com.example.haitran.cura.objects.ImageDay;
 import com.example.haitran.cura.views.adapters.RecyclerFileFolderAdapter;
 import com.software.shell.fab.ActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class FileFolderFragment extends Fragment {
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_file_folder);
-        loadData(subtitle);
+        loadDataForInternet(subtitle);
         RecyclerFileFolderAdapter recyclerFileFolderAdapter = new RecyclerFileFolderAdapter(getContext(),(AppCompatActivity)getActivity(),mList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -103,7 +104,7 @@ public class FileFolderFragment extends Fragment {
             }
         });
     }
-    private void loadData(String filename){
+    private void loadDataForInternet(String filename){
 
         String [] today = {"http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
                 "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg"};
@@ -122,5 +123,18 @@ public class FileFolderFragment extends Fragment {
         mList.add(imageDay);
         mList.add(imageDay1);
         mList.add(imageDay2);
+    }
+    private void loadDataLocal(String filename){
+        ArrayList<String> f = new ArrayList<String>();
+        File file= new File(android.os.Environment.getExternalStorageDirectory(),filename);
+        File[] listFile;
+        if (file.isDirectory())
+        {
+            listFile = file.listFiles();
+            for (int i = 0; i < listFile.length; i++)
+            {
+                f.add(listFile[i].getAbsolutePath());
+            }
+        }
     }
 }

@@ -24,6 +24,11 @@ public class RecyclerFileFolderAdapter extends RecyclerView.Adapter<RecyclerFile
     Context mContext;
     AppCompatActivity mAppCompatActivity;
     List<ImageDay> mList;
+    private boolean isLocal = false;
+
+    public void setIsLocal(boolean isLocal) {
+        this.isLocal = isLocal;
+    }
 
     public RecyclerFileFolderAdapter(Context mContext, AppCompatActivity mAppCompatActivity, List<ImageDay> mList) {
         this.mContext = mContext;
@@ -71,18 +76,30 @@ public class RecyclerFileFolderAdapter extends RecyclerView.Adapter<RecyclerFile
             textDay.setText(imageDay.getDay());
             if(imageDay.getUrlImage().length>3){
                 for (int i=0;i<3;i++){
-                    listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    if (!isLocal) {
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    }else {
+
+                    }
                 }
                 textImage.setText("+"+(imageDay.getUrlImage().length-2));
             }
             else if (imageDay.getUrlImage().length==3){
                 for (int i=0;i<imageDay.getUrlImage().length;i++){
-                    listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    if (!isLocal) {
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    }else {
+
+                    }
                 }
                 textImage.setVisibility(View.GONE);
             }else if(imageDay.getUrlImage().length<3){
                 for (int i=0;i<imageDay.getUrlImage().length;i++){
-                    listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    if (!isLocal) {
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                    }else {
+
+                    }
                 }
                 for (int i=imageDay.getUrlImage().length; i<3; i++){
                     listImage.get(i).setVisibility(View.GONE);
