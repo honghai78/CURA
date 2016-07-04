@@ -38,7 +38,7 @@
 <TextView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="Save Picter"
+    android:text="Save to Folder"
     android:textStyle="bold"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:textColor="@android:color/white"

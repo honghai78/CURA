@@ -28,6 +28,7 @@ import com.example.haitran.cura.R;
 public class CameraPreViewFragment extends Fragment {
     private byte[] mData;
     private Bitmap mBitmap;
+    private LinearLayout savePhoto;
     private ImageView mImageView;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,6 +65,13 @@ public class CameraPreViewFragment extends Fragment {
                 }
                 if(fragment1!=null)
                     fragment1.onResume();
+            }
+        });
+        savePhoto = (LinearLayout) view.findViewById(R.id.pre_line);
+        savePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         return view;
@@ -132,4 +140,6 @@ public class CameraPreViewFragment extends Fragment {
         bm.recycle();
         return resizedBitmap;
     }
+
+
 }
