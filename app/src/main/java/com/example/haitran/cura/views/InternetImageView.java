@@ -21,7 +21,7 @@ public class InternetImageView extends ImageView {
 	public InternetImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-
+	private Bitmap bitmap;
 	private ProgressBar progressBar = null;
 	public void setImageAsync(String url) {
 		setImageResource(R.drawable.thumbnail_default);
@@ -34,6 +34,10 @@ public class InternetImageView extends ImageView {
 		new DownloadImageTask().execute(url);
 	}
 
+	public Bitmap getBitmap()
+	{
+		return bitmap;
+	}
 
 	////////////////////////////
 
@@ -97,14 +101,16 @@ public class InternetImageView extends ImageView {
 		@Override
 		protected void onPostExecute(Bitmap bitmap) {
 			if (bitmap != null) {
+				InternetImageView.this.bitmap = bitmap;
 				InternetImageView.this.setImageBitmap(bitmap);
-				if(progressBar!=null)
-				progressBar.setVisibility(GONE);
+				if(InternetImageView.this.progressBar!=null)
+				InternetImageView.this.progressBar.setVisibility(GONE);
 			}
 		else{
+				InternetImageView.this.bitmap = null;
 				InternetImageView.this.setImageResource(R.drawable.thumbnail_default);
-				if(progressBar!=null)
-				progressBar.setVisibility(GONE);
+				if(InternetImageView.this.progressBar!=null)
+				InternetImageView.this.progressBar.setVisibility(GONE);
 				Toast.makeText(getContext(), "Can not download image!", Toast.LENGTH_LONG).show();
 			}
 		}
