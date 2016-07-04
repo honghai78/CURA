@@ -82,7 +82,9 @@ public class RegisteredPatientFragment extends Fragment {
 
     public void setUpRecyclerView() {
         //Get all registered patient
-        registeredPatientList = ((HomeActivity) getActivity()).getRegisteredPatientList();
+        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment!=null)
+        registeredPatientList = fragment.getRegisteredPatientList();
 
         adapter = new RegisteredPatientAdapter(getActivity(), registeredPatientList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -91,7 +93,9 @@ public class RegisteredPatientFragment extends Fragment {
     }
 
     public void reload_list() {
-        registeredPatientList = ((HomeActivity)getActivity()).getRegisteredPatientList();
+        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment!=null)
+        registeredPatientList = fragment.getRegisteredPatientList();
         adapter.notifyDataSetChanged();
         mTxtCountPatient.setText(registeredPatientList.size() + "");
     }

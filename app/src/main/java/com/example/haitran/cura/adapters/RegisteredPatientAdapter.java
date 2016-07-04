@@ -2,6 +2,7 @@ package com.example.haitran.cura.adapters;
 
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.ContextThemeWrapper;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.haitran.cura.R;
 import com.example.haitran.cura.activities.HomeActivity;
+import com.example.haitran.cura.fragments.HomeFragment;
 import com.example.haitran.cura.fragments.RegisteredPatientFragment;
 import com.example.haitran.cura.models.Patient;
 
@@ -89,7 +91,9 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
 
                             List<Patient> patients = new ArrayList<>();
                             if (mContext instanceof HomeActivity) {
-                                patients = ((HomeActivity) mContext).getPatientsInQueueList();
+                                HomeFragment fragment = (HomeFragment) ((HomeActivity) mContext).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+                                if (fragment != null)
+                                    patients = fragment.getPatientsInQueueList();
                             }
                             boolean check = false;
                             for (int i = 0; i < patients.size(); i++) {
@@ -149,8 +153,11 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
 
     public void setArrivalTime(Patient patient, int position) {
         if (mContext instanceof HomeActivity) {
-            ((HomeActivity) mContext).setPatientSelected(patient);     //Sent patient to In Queue
-            ((HomeActivity) mContext).updateRegisteredPatient(position);
+            HomeFragment fragment = (HomeFragment) ((HomeActivity) mContext).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+            if (fragment != null) {
+                fragment.setPatientSelected(patient);     //Sent patient to In Queue
+                fragment.updateRegisteredPatient(position);
+            }
             registeredFragment.reload_list();
         }
     }
@@ -189,8 +196,7 @@ public class RegisteredPatientAdapter extends RecyclerView.Adapter<RegisteredPat
             txt_arrival_time = (TextView) itemView.findViewById(R.id.txt_arrival_time_cv);
         }
 
-        public void clearAnimation()
-        {
+        public void clearAnimation() {
             mView.clearAnimation();
         }
     }

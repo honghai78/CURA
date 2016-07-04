@@ -68,7 +68,9 @@ public class InQueueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getWidget(view);
 
-        patientsInQueueList = ((HomeActivity) getActivity()).getPatientsInQueueList();
+        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment!=null)
+        patientsInQueueList = fragment.getPatientsInQueueList();
 
         mSpinSelectDoctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
