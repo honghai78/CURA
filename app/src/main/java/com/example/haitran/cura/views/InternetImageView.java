@@ -75,7 +75,7 @@ public class InternetImageView extends ImageView {
 						BitmapFactory.Options options = new BitmapFactory.Options();
 						options.inJustDecodeBounds = true;
 						BitmapFactory.decodeStream(inputStream, null, options);
-						options.inSampleSize = calculateInSampleSize(options, 720, 1024);
+						options.inSampleSize = calculateInSampleSize(options, 1024, 720);
 						options.inJustDecodeBounds = false;
 						urlConnection = (HttpURLConnection) new URL(url).openConnection();
 						inputStream = urlConnection.getInputStream();
