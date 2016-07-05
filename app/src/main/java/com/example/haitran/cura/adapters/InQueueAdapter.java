@@ -1,6 +1,8 @@
 package com.example.haitran.cura.adapters;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.fragments.PatientSummaryFragment;
 import com.example.haitran.cura.models.Patient;
 
 import java.util.List;
@@ -21,11 +24,13 @@ import java.util.List;
 public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHolder> {
 
     private Activity mActivity;
+    private AppCompatActivity mAppCompatActivity;
     private List<Patient> patientList;
 
-    public InQueueAdapter(Activity mActivity, List<Patient> patientList) {
+    public InQueueAdapter(Activity mActivity, List<Patient> patientList, AppCompatActivity mAppCompatActivity) {
         this.mActivity = mActivity;
         this.patientList = patientList;
+        this.mAppCompatActivity = mAppCompatActivity;
     }
 
     @Override
@@ -95,6 +100,15 @@ public class InQueueAdapter extends RecyclerView.Adapter<InQueueAdapter.MyViewHo
             txt_count_visit = (TextView) itemView.findViewById(R.id.txt_count_visit_cv_iq);
             img_patient = (ImageView) itemView.findViewById(R.id.img_patient_cv_iq);
             txt_arrival_time = (TextView) itemView.findViewById(R.id.txt_arrival_time_cv_iq);
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PatientSummaryFragment frag = new PatientSummaryFragment();
+                    frag.setSubTitle(txt_name_patient.getText().toString());
+                     FragmentTransaction fragmentTransaction =mAppCompatActivity.getSupportFragmentManager().beginTransaction();
+                      fragmentTransaction.add(R.id.layout_home, frag,"PAGE_PATIENT_DETAIL").commit();
+                }
+            });
         }
 
         public void clearAnimation()

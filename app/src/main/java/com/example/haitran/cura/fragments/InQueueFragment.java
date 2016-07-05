@@ -4,6 +4,7 @@ package com.example.haitran.cura.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -113,8 +114,9 @@ public class InQueueFragment extends Fragment {
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView_In_Queue.setLayoutManager(mLayoutManager);
-        adapter_In_Queue = new InQueueAdapter(getActivity(), patientsByDoctor);
+        adapter_In_Queue = new InQueueAdapter(getActivity(), patientsByDoctor,(AppCompatActivity)getActivity());
         recyclerView_In_Queue.setAdapter(adapter_In_Queue);
+
 
     }
 }

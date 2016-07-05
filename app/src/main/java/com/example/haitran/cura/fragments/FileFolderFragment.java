@@ -1,6 +1,8 @@
 package com.example.haitran.cura.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,7 +22,9 @@ import com.example.haitran.cura.views.adapters.RecyclerFileFolderAdapter;
 import com.software.shell.fab.ActionButton;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,14 +69,14 @@ public class FileFolderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CameraActivity.class);
-                intent.putExtra("FILE_FOLDER", 2);
                 getActivity().startActivity(intent);
-                getActivity().finish();
             }
         });
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_file_folder);
-        loadDataForInternet(subtitle);
+        //loadDataForInternet(subtitle);
+        loadDataLocal("Labs");
         RecyclerFileFolderAdapter recyclerFileFolderAdapter = new RecyclerFileFolderAdapter(getContext(),(AppCompatActivity)getActivity(),mList);
+        recyclerFileFolderAdapter.setIsLocal(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(recyclerFileFolderAdapter);
@@ -105,19 +109,22 @@ public class FileFolderFragment extends Fragment {
         });
     }
     private void loadDataForInternet(String filename){
-
-        String [] today = {"http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg"};
+        String url = "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg";
+        ArrayList<String> today = new ArrayList<String>();
+        today.add(url);
+        today.add(url);
 
         ImageDay imageDay= new ImageDay("To day",today);
-        String [] June = {"http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg"};
+        ArrayList<String> June = new ArrayList<String>();
+        June.add(url);
+        June.add(url);
+        June.add(url);
         ImageDay imageDay1 = new ImageDay("16 June 2016",June);
-        String [] May = {"http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg",
-                "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg"};
+        ArrayList<String> May = new ArrayList<String>();
+        May.add(url);
+        May.add(url);
+        May.add(url);
+        May.add(url);
         ImageDay imageDay2 = new ImageDay("08 May 2016", May);
         mList = new ArrayList<ImageDay>();
         mList.add(imageDay);
@@ -136,5 +143,34 @@ public class FileFolderFragment extends Fragment {
                 f.add(listFile[i].getAbsolutePath());
             }
         }
+        ArrayList<String> arrDayImage = new ArrayList<String>();
+        for (String path : f){
+            File filePath = new File(path);
+            Date lastModDate = new Date(file.lastModified());
+            String date = new SimpleDateFormat("dd MMMM yyyy").format(lastModDate);
+            if (!isExist(arrDayImage,date)){
+                arrDayImage.add(date);
+            }
+        }
+        ArrayList<String> arrayPathImageDay = new ArrayList<String>();
+        for (String day: arrDayImage){
+            for (String path : f){
+                File filePath = new File(path);
+                Date lastModDate = new Date(file.lastModified());
+                String date = new SimpleDateFormat("dd MMMM yyyy").format(lastModDate);
+                if (day.equals(date)){
+                    arrayPathImageDay.add(path);
+                }
+            }
+            ImageDay imageDay = new ImageDay(day,arrayPathImageDay);
+            mList = new ArrayList<ImageDay>();
+            mList.add(imageDay);
+        }
+    }
+    private boolean isExist(ArrayList<String> arrayList,String day){
+        for (String dayList :arrayList){
+            if (day.equals(dayList)) return true;
+        }
+        return false;
     }
 }

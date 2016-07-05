@@ -51,7 +51,6 @@ public class FileHomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CameraActivity.class);
                 getActivity().startActivity(intent);
-                getActivity().finish();
             }
         });
         return view;

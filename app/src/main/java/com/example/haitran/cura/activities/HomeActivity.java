@@ -1,11 +1,11 @@
 package com.example.haitran.cura.activities;
 
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.haitran.cura.R;
@@ -14,11 +14,6 @@ import com.example.haitran.cura.fragments.FileHomeFragment;
 import com.example.haitran.cura.fragments.PatientSummaryFragment;
 import com.example.haitran.cura.fragments.SiginFragmentMain;
 
-/**
- * Created by kha.phan on 6/29/2016.
- */
-public class HomeActivity extends AppCompatActivity {
-=======
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -40,43 +35,20 @@ import com.example.haitran.cura.models.Patient;
 
 import java.util.List;
 
+/**
+ * Created by kha.phan on 6/29/2016.
+ */
 public class HomeActivity extends AppCompatActivity {
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Intent intent = getIntent();
-
-            int i = intent.getIntExtra("CAMERA",0);
-            if (i==1){
-                Fragment frag = new PatientSummaryFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.layout_home, frag).commit();
-                Fragment frag1 = new FileHomeFragment();
-                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction1.add(R.id.layout_home, frag1,"PAGE_FILE_HOME").commit();
-            }else if (i==2){
-                Fragment frag = new PatientSummaryFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.layout_home, frag).commit();
-                Fragment frag1 = new FileHomeFragment();
-                FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction1.add(R.id.layout_home, frag1,"PAGE_FILE_HOME").commit();
-                Fragment frag2 = new FileFolderFragment();
-                FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction2.add(R.id.layout_home, frag2,"PAGE_FILE_FOLDER").commit();
-            }
-
-        else {
 			Fragment frag = new HomeFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.layout_home, frag, "FR_HOME").commit();
-        }
+
 		//Fragment frag = new PatientSummaryFragment();
        // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
       //  fragmentTransaction.add(R.id.layout_home, frag).commit();
@@ -99,8 +71,9 @@ public class HomeActivity extends AppCompatActivity {
 //                Fragment frag = new SiginFragmentMain();
 //                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 if(getSupportActionBar().getTitle().equals("Files")){
-                    getSupportActionBar().setTitle("Patient Detail:");
-                    getSupportActionBar().setSubtitle("Mr Kha");
+                    getSupportActionBar().setTitle("Patient Detail :");
+                    PatientSummaryFragment fragment1 = (PatientSummaryFragment)getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
+                    getSupportActionBar().setSubtitle(fragment1.getSubTitle());
                     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                     getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
                     Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_FILE_HOME");
@@ -120,15 +93,23 @@ public class HomeActivity extends AppCompatActivity {
                         fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
                         fragmentTransaction.remove(fragment).commit();
                     }
+                }else if (getSupportActionBar().getTitle().equals("Patient Detail :")){
+                    ActionBar ab = getSupportActionBar();
+                    ab.setTitle("Home");
+                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                    getSupportActionBar().setHomeButtonEnabled(true);
+                    getSupportActionBar().setSubtitle(null);
+                    Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
+                    if (fragment != null) {
+                        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                        fragmentTransaction.remove(fragment).commit();
+                    }
                 }
                 break;
 			case R.id.menu_search:
-                Toast.makeText(getBaseContext(), "Search clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_about:
-                byte[] bytes = new byte[0];
-                CustomDialogChoiceFolderToSave dialog = new CustomDialogChoiceFolderToSave(this, bytes);
-                dialog.onCreateDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -51,8 +51,6 @@ public class HomeFragment extends Fragment {
         ab.setTitle("Home");
 //        ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
-        ab.setIcon(R.mipmap.ic_home_3);
-        ab.setDefaultDisplayHomeAsUpEnabled(true);
 
         viewPagerHome = (ViewPager) view.findViewById(R.id.view_pager_home);
         pagerTabStripHome = (PagerSlidingTabStrip) view.findViewById(R.id.pager_tab_strip_home);

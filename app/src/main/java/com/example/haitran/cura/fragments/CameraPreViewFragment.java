@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,10 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.haitran.cura.R;
+import com.example.haitran.cura.activities.CameraActivity;
 
 /**
  * Created by hai.tran on 7/1/2016.
@@ -38,39 +41,36 @@ public class CameraPreViewFragment extends Fragment {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
         int height = displaymetrics.heightPixels;
         int width = displaymetrics.widthPixels;
-        mImageView.setImageBitmap(Bitmap.createScaledBitmap(mBitmap, width, height*8/10, true));
+        mImageView.setImageBitmap(Bitmap.createScaledBitmap(mBitmap, width, height * 8 / 10, true));
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Preview of Photo");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.prev_line1);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.pre_line);
+      linearLayout.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              Log.d("saveIMage", "onClick: ");
+              Toast.makeText(getActivity(),"click",Toast.LENGTH_SHORT).show();
+              CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(), mData);
+              customDialogChoiceFolderToSave.show();
+          }
+      });
 
         ImageView imageView = (ImageView) view.findViewById(R.id.pre_delete);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
-                android.app.Fragment fragment1 = getActivity().getFragmentManager().findFragmentByTag("B");
-                if (fragment != null) {
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    //fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                    fragmentTransaction.remove(fragment).commit();
-                    ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-                }
-                if(fragment1!=null)
-                    fragment1.onResume();
+                ((CameraActivity) getActivity()).replace();
             }
         });
         savePhoto = (LinearLayout) view.findViewById(R.id.pre_line);
         savePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "OK", Toast.LENGTH_LONG).show();
+                CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(),mData);
+                customDialogChoiceFolderToSave.onCreateDialog();
 
             }
         });
@@ -107,16 +107,7 @@ public class CameraPreViewFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
-                    android.app.Fragment fragment1 = getActivity().getFragmentManager().findFragmentByTag("B");
-                    if (fragment != null) {
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        //fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                        fragmentTransaction.remove(fragment).commit();
-                        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-                    }
-                    if(fragment1!=null)
-                        fragment1.onResume();
+                    ((CameraActivity) getActivity()).replace();
                     return true;
                 }
                 return false;

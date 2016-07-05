@@ -72,10 +72,10 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
                         Bitmap bitmap = convertFromBytesToBitmap(bytes);
                         String imageName = checkBoxList.get(i).getText() + "-" + i;
                         String folderName = checkBoxList.get(i).getText().toString();
-                        createDirectoryAndSaveFile(bitmap, imageName, folderName);
-
-                        Toast.makeText(mActivity, "You choice checkbox " + (i + 1) + ":" + checkBoxList.get(i).getText(),
-                                Toast.LENGTH_SHORT).show();
+                        if(createDirectoryAndSaveFile(bitmap, imageName, folderName)){
+                            Toast.makeText(mActivity, "You choice checkbox " + (i + 1) + ":" + checkBoxList.get(i).getText(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                         isCheck = true;
                         break;
                     }
@@ -118,22 +118,21 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
         return bit;
     }
 
-    private void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName, String folderName) {
+    private boolean createDirectoryAndSaveFile(Bitmap imageToSave, String fileName, String folderName) {
 
-        File direct = mActivity.getDir(folderName, mActivity.MODE_PRIVATE);
-//        direct = new File(direct, fileName);
-
-//        File direct = new File(Environment.getExternalStorageDirectory() + "/" + folderName);
+       // File direct = mActivity.getDir(folderName, mActivity.MODE_PRIVATE);
+       // direct = new File(direct, fileName);
+        File direct = new File(Environment.getExternalStorageDirectory() + "/" + folderName);
 
         if (!direct.exists()) {
-//            File wallpaperDirectory = new File("/sdcard/" + folderName + "/");
-//            wallpaperDirectory.mkdirs();
-            File wallpaperDirectory = new File(folderName + "/");
+            File wallpaperDirectory = new File("/sdcard/" + folderName + "/");
             wallpaperDirectory.mkdirs();
+//            File wallpaperDirectory = new File(folderName + "/");
+//            wallpaperDirectory.mkdirs();
         }
 
-//        File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
-        File file = new File(new File(folderName + "/"), fileName);
+       File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
+//        File file = new File(new File(folderName + "/"), fileName);
         if (file.exists()) {
             file.delete();
         }
@@ -144,6 +143,8 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }

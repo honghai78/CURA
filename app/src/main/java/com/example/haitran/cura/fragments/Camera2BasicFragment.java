@@ -256,8 +256,7 @@ public class Camera2BasicFragment extends Fragment
             CameraPreViewFragment frag = new CameraPreViewFragment();
             frag.setData(bytes);
             FragmentTransaction fragmentTransaction =((CameraActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.fragment_main, frag, "PAGE_PRE").commit();
-            onPause();
+            fragmentTransaction.replace(R.id.fragment_main, frag, "PAGE_PRE").commit();
         }
 
     };

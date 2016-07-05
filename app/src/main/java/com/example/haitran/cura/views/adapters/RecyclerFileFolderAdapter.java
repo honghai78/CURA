@@ -1,6 +1,8 @@
 package com.example.haitran.cura.views.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -73,35 +75,39 @@ public class RecyclerFileFolderAdapter extends RecyclerView.Adapter<RecyclerFile
             listImage.add(imageFolder3);
         }
         public void setData(ImageDay imageDay){
+
             textDay.setText(imageDay.getDay());
-            if(imageDay.getUrlImage().length>3){
+            if(imageDay.getUrlImage().size()>3){
                 for (int i=0;i<3;i++){
                     if (!isLocal) {
-                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage().get(i));
                     }else {
-
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imageDay.getUrlImage().get(i));
+                        listImage.get(i).setImageBitmap(myBitmap);
                     }
                 }
-                textImage.setText("+"+(imageDay.getUrlImage().length-2));
+                textImage.setText("+"+(imageDay.getUrlImage().size()-2));
             }
-            else if (imageDay.getUrlImage().length==3){
-                for (int i=0;i<imageDay.getUrlImage().length;i++){
+            else if (imageDay.getUrlImage().size()==3){
+                for (int i=0;i<imageDay.getUrlImage().size();i++){
                     if (!isLocal) {
-                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage().get(i));
                     }else {
-
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imageDay.getUrlImage().get(i));
+                        listImage.get(i).setImageBitmap(myBitmap);
                     }
                 }
                 textImage.setVisibility(View.GONE);
-            }else if(imageDay.getUrlImage().length<3){
-                for (int i=0;i<imageDay.getUrlImage().length;i++){
+            }else if(imageDay.getUrlImage().size()<3){
+                for (int i=0;i<imageDay.getUrlImage().size();i++){
                     if (!isLocal) {
-                        listImage.get(i).setImageAsync(imageDay.getUrlImage()[i]);
+                        listImage.get(i).setImageAsync(imageDay.getUrlImage().get(i));
                     }else {
-
+                        Bitmap myBitmap = BitmapFactory.decodeFile(imageDay.getUrlImage().get(i));
+                        listImage.get(i).setImageBitmap(myBitmap);
                     }
                 }
-                for (int i=imageDay.getUrlImage().length; i<3; i++){
+                for (int i=imageDay.getUrlImage().size(); i<3; i++){
                     listImage.get(i).setVisibility(View.GONE);
                 }
                 textImage.setVisibility(View.GONE);

@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/prev_line1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:orientation="vertical"
-    android:weightSum="10"
-    android:id="@+id/prev_line1"
-    android:background="@android:color/black">
+    android:weightSum="10">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:id="@+id/pre_image" />
 
         <ImageView
+            android:id="@+id/pre_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin" />
+
+        <ImageView
+            android:id="@+id/pre_delete"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@android:drawable/ic_menu_delete"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:id="@+id/pre_delete"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp"
+            android:src="@android:drawable/ic_menu_delete" />
     </RelativeLayout>
+
     <LinearLayout
+        android:id="@+id/pre_line"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/colorAccent"
-        android:id="@+id/pre_line"
         android:orientation="horizontal">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="Save to Folder"
-    android:textStyle="bold"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="@android:color/white"
-    android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Save to Folder"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
