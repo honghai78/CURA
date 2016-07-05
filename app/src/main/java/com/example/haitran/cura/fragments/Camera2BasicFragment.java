@@ -258,7 +258,9 @@ public class Camera2BasicFragment extends Fragment
             CameraPreViewFragment frag = new CameraPreViewFragment();
             frag.setData(bytes);
             FragmentTransaction fragmentTransaction =((CameraActivity)getActivity()).getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_main, frag, "PAGE_PRE").commit();
+           fragmentTransaction.setCustomAnimations(R.transition.slide_in, R.transition.slide_out);
+            fragmentTransaction.add(R.id.fragment_main, frag, "PAGE_PRE").commit();
+            onPause();
         }
 
     };
@@ -904,6 +906,12 @@ public class Camera2BasicFragment extends Fragment
                     mBackgroundHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
+        }
+        catch (NullPointerException n)
+        {
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_main, Camera2BasicFragment.newInstance(), "B")
+                    .commit();
         }
     }
     private int configFlash=0;

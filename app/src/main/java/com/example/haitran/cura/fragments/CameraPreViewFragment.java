@@ -33,6 +33,7 @@ public class CameraPreViewFragment extends Fragment {
     private Bitmap mBitmap;
     private LinearLayout savePhoto;
     private ImageView mImageView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera_preview, container, false);
@@ -42,36 +43,45 @@ public class CameraPreViewFragment extends Fragment {
         int height = displaymetrics.heightPixels;
         int width = displaymetrics.widthPixels;
         mImageView.setImageBitmap(Bitmap.createScaledBitmap(mBitmap, width, height * 8 / 10, true));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Preview of Photo");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Preview of Photo");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.pre_line);
-      linearLayout.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Log.d("saveIMage", "onClick: ");
-              Toast.makeText(getActivity(),"click",Toast.LENGTH_SHORT).show();
-              CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(), mData);
-              customDialogChoiceFolderToSave.show();
-          }
-      });
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.pre_delete);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CameraActivity) getActivity()).replace();
+                Log.d("saveIMage", "onClick: ");
+                Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
+                CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(), mData);
+                customDialogChoiceFolderToSave.show();
             }
         });
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.pre_delete);
+       imageView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
+               android.app.Fragment fragment1 = getActivity().getFragmentManager().findFragmentByTag("B");
+               if (fragment != null) {
+                   FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                   fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                   fragmentTransaction.remove(fragment).commit();
+                   ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+                   if (fragment1 != null)
+                       fragment1.onResume();
+               }
+
+           }
+       });
         savePhoto = (LinearLayout) view.findViewById(R.id.pre_line);
         savePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "OK", Toast.LENGTH_LONG).show();
-                CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(),mData);
+               // Toast.makeText(getContext(), "OK", Toast.LENGTH_LONG).show();
+                CustomDialogChoiceFolderToSave customDialogChoiceFolderToSave = new CustomDialogChoiceFolderToSave(getActivity(), mData);
                 customDialogChoiceFolderToSave.onCreateDialog();
-
             }
         });
         return view;
@@ -81,10 +91,12 @@ public class CameraPreViewFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-    public void setData(byte[] data)
-    {
+
+    public void setData(byte[] data) {
         mData = data;
-        mBitmap = rotateImage(BitmapFactory.decodeByteArray(mData, 0, mData.length), 90);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        mBitmap = rotateImage(BitmapFactory.decodeByteArray(mData, 0, mData.length, options), 90);
 
     }
 
@@ -107,7 +119,17 @@ public class CameraPreViewFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    ((CameraActivity) getActivity()).finish();
+                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
+                    android.app.Fragment fragment1 = getActivity().getFragmentManager().findFragmentByTag("B");
+                    if (fragment != null) {
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                        fragmentTransaction.remove(fragment).commit();
+                        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+                        if (fragment1 != null) {
+                            fragment1.onResume();
+                        }
+                    }
                     return true;
                 }
                 return false;

@@ -11,14 +11,11 @@ import com.example.haitran.cura.fragments.Camera2BasicFragment;
 import com.example.haitran.cura.R;
 
 public class CameraActivity extends AppCompatActivity {
-    private int fragmentStart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
-        Intent intent = getIntent();
-
-        fragmentStart = intent.getIntExtra("FILE_FOLDER",0);
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
                     .add(R.id.fragment_main, Camera2BasicFragment.newInstance(), "B")
@@ -31,7 +28,16 @@ public class CameraActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
 //                 getView().setFocusableInTouchMode(true);
-                replace();
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
+                android.app.Fragment fragment1 = getFragmentManager().findFragmentByTag("B");
+                if (fragment != null) {
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                    fragmentTransaction.remove(fragment).commit();
+                    getSupportActionBar().hide();
+                }
+                if (fragment1 != null)
+                    fragment1.onResume();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -40,15 +46,18 @@ public class CameraActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PRE");
+        android.app.Fragment fragment1 = getFragmentManager().findFragmentByTag("B");
+        if (fragment != null) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+            fragmentTransaction.remove(fragment).commit();
+            getSupportActionBar().hide();
+            if (fragment1 != null)
+                fragment1.onResume();
+        }
+        else
+        finish();
 
-            finish();
-
-    }
-
-    public void replace()
-    {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_main, Camera2BasicFragment.newInstance())
-                .commit();
     }
 }
