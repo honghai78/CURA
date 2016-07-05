@@ -18,7 +18,10 @@ import com.example.haitran.cura.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -69,10 +72,9 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
                 boolean isCheck = false;
                 for (int i = 0; i < checkBoxList.size(); i++)
                     if (checkBoxList.get(i).isChecked()) {
-                        Bitmap bitmap = convertFromBytesToBitmap(bytes);
-                        String imageName = checkBoxList.get(i).getText() + "-" + i;
+                        String imageName = new SimpleDateFormat("MMddyyyy_HHmmss").format(Calendar.getInstance().getTime());
                         String folderName = checkBoxList.get(i).getText().toString();
-                        if(createDirectoryAndSaveFile(bitmap, imageName, folderName)){
+                        if(createDirectoryAndSaveFile(imageName, folderName)){
                             Toast.makeText(mActivity, "You choice checkbox " + (i + 1) + ":" + checkBoxList.get(i).getText(),
                                     Toast.LENGTH_SHORT).show();
                         }
@@ -118,7 +120,7 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
         return bit;
     }
 
-    private boolean createDirectoryAndSaveFile(Bitmap imageToSave, String fileName, String folderName) {
+    private boolean createDirectoryAndSaveFile(String fileName, String folderName) {
 
        // File direct = mActivity.getDir(folderName, mActivity.MODE_PRIVATE);
        // direct = new File(direct, fileName);
@@ -130,20 +132,35 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
 //            File wallpaperDirectory = new File(folderName + "/");
 //            wallpaperDirectory.mkdirs();
         }
-
-       File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
+       File file = new File(new File("/sdcard/" + folderName + "/"), fileName+".jpg");
 //        File file = new File(new File(folderName + "/"), fileName);
         if (file.exists()) {
             file.delete();
         }
+//        try {
+//            FileOutputStream out = new FileOutputStream(file);
+//            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+//            out.flush();
+//            out.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+        FileOutputStream output = null;
         try {
-            FileOutputStream out = new FileOutputStream(file);
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
+            output = new FileOutputStream(file);
+            output.write(bytes);
+        } catch (IOException e) {
             e.printStackTrace();
-            return false;
+        } finally {
+            //mImage.close();
+            if (null != output) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return true;
     }
