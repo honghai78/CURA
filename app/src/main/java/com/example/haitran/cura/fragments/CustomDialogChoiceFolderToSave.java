@@ -18,7 +18,9 @@ import com.example.haitran.cura.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -69,13 +71,13 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
                 boolean isCheck = false;
                 for (int i = 0; i < checkBoxList.size(); i++)
                     if (checkBoxList.get(i).isChecked()) {
-                        Bitmap bitmap = convertFromBytesToBitmap(bytes);
-                        String imageName = checkBoxList.get(i).getText() + "-" + i;
-                        String folderName = checkBoxList.get(i).getText().toString();
-                        createDirectoryAndSaveFile(bitmap, imageName, folderName);
-
-                        Toast.makeText(mActivity, "You choice checkbox " + (i + 1) + ":" + checkBoxList.get(i).getText(),
-                                Toast.LENGTH_SHORT).show();
+                        String imageName = new SimpleDateFormat("MMddyyyy_hhmmss").format(Calendar.getInstance().getTime());
+                        String folderName = checkBoxList.get(i).getText().toString().split(" ").toString();
+                        if (createDirectoryAndSaveFile(bytes, imageName, folderName)) {
+                            Toast.makeText(mActivity, "Saved at folder: " + folderName, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mActivity, "Save fail", Toast.LENGTH_SHORT).show();
+                        }
                         isCheck = true;
                         break;
                     }
@@ -110,40 +112,26 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
         }
     }
 
-    public Bitmap convertFromBytesToBitmap(byte[] bytes) {
-        Bitmap background = BitmapFactory.decodeByteArray(bytes, 0,
-                bytes.length);
-        Bitmap bit = Bitmap.createBitmap(background.getWidth(),
-                background.getHeight(), Bitmap.Config.ARGB_8888);
-        return bit;
-    }
+    private boolean createDirectoryAndSaveFile(byte[] bytes, String fileName, String folderName) {
 
-    private void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName, String folderName) {
-
-        File direct = mActivity.getDir(folderName, mActivity.MODE_PRIVATE);
-//        direct = new File(direct, fileName);
-
-//        File direct = new File(Environment.getExternalStorageDirectory() + "/" + folderName);
-
+        File direct = new File(Environment.getExternalStorageDirectory() + "/" + folderName);
         if (!direct.exists()) {
-//            File wallpaperDirectory = new File("/sdcard/" + folderName + "/");
-//            wallpaperDirectory.mkdirs();
-            File wallpaperDirectory = new File(folderName + "/");
+            File wallpaperDirectory = new File("/sdcard/" + folderName + "/");
             wallpaperDirectory.mkdirs();
         }
 
-//        File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
-        File file = new File(new File(folderName + "/"), fileName);
+        File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
         if (file.exists()) {
             file.delete();
         }
         try {
             FileOutputStream out = new FileOutputStream(file);
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
+            out.write(bytes);
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }
