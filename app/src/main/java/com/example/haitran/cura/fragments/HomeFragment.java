@@ -43,11 +43,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         data = new MyData();
 
-        ActionBar ab = ((HomeActivity)getActivity()).getSupportActionBar();
+        ActionBar ab = ((HomeActivity) getActivity()).getSupportActionBar();
         ab.setTitle("Home");
 //        ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
         patientsInQueueList = data.sortPatientByTimeInQueue(data.getPatientListInQueue());
 
         mTitlesOfTab = new String[]{"Registered (" + registeredPatientList.size() + ")", "In Queue (" + patientsInQueueList.size() + ")"};
-        homePagerAdapter = new HomePagerAdapter(((HomeActivity)getActivity()).getSupportFragmentManager(), mTitlesOfTab);
+        homePagerAdapter = new HomePagerAdapter(((HomeActivity) getActivity()).getSupportFragmentManager(), mTitlesOfTab);
         viewPagerHome.setAdapter(homePagerAdapter);
         viewPagerHome.setPageTransformer(true, new RotateUpTransformer());
 
@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
         patientsInQueueList = data.sortPatientByTimeInQueue(data.getPatientListInQueue());
 
         mTitlesOfTab = new String[]{"Registered\n (" + registeredPatientList.size() + ")", "In Queue\n (" + patientsInQueueList.size() + ")"};
-        homePagerAdapter = new HomePagerAdapter(((HomeActivity)getActivity()).getSupportFragmentManager(), mTitlesOfTab);
+        homePagerAdapter = new HomePagerAdapter((getActivity()).getSupportFragmentManager(), mTitlesOfTab);
         viewPagerHome.setAdapter(homePagerAdapter);
         viewPagerHome.setPageTransformer(true, new RotateUpTransformer());
 

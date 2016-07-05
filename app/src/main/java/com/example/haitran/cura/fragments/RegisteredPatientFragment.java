@@ -1,6 +1,8 @@
 package com.example.haitran.cura.fragments;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import com.example.haitran.cura.activities.HomeActivity;
 import com.example.haitran.cura.adapters.RegisteredPatientAdapter;
 import com.example.haitran.cura.models.Patient;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -82,9 +85,9 @@ public class RegisteredPatientFragment extends Fragment {
 
     public void setUpRecyclerView() {
         //Get all registered patient
-        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
-        if (fragment!=null)
-        registeredPatientList = fragment.getRegisteredPatientList();
+        HomeFragment fragment = (HomeFragment) ((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment != null)
+            registeredPatientList = fragment.getRegisteredPatientList();
 
         adapter = new RegisteredPatientAdapter(getActivity(), registeredPatientList, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -93,9 +96,9 @@ public class RegisteredPatientFragment extends Fragment {
     }
 
     public void reload_list() {
-        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
-        if (fragment!=null)
-        registeredPatientList = fragment.getRegisteredPatientList();
+        HomeFragment fragment = (HomeFragment) (getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment != null)
+            registeredPatientList = fragment.getRegisteredPatientList();
         adapter.notifyDataSetChanged();
         mTxtCountPatient.setText(registeredPatientList.size() + "");
     }

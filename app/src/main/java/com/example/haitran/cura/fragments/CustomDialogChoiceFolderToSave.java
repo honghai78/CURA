@@ -2,9 +2,6 @@ package com.example.haitran.cura.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -71,16 +68,19 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
                 boolean isCheck = false;
                 for (int i = 0; i < checkBoxList.size(); i++)
                     if (checkBoxList.get(i).isChecked()) {
-                        String imageName = new SimpleDateFormat("MMddyyyy_hhmmss").format(Calendar.getInstance().getTime());
+                        String imageName = new SimpleDateFormat("MMddyyyy_HHmmss").format(Calendar.getInstance().getTime());
                         String folderName = checkBoxList.get(i).getText().toString().split(" ").toString();
+
                         if (createDirectoryAndSaveFile(bytes, imageName, folderName)) {
                             Toast.makeText(mActivity, "Saved at folder: " + folderName, Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(mActivity, "Save fail", Toast.LENGTH_SHORT).show();
                         }
+
                         isCheck = true;
                         break;
                     }
+
                 if (isCheck) {
                     dialog.dismiss();
                 } else {
@@ -134,4 +134,5 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
         }
         return true;
     }
+
 }

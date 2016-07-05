@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.haitran.cura.R;
-import com.example.haitran.cura.activities.HomeActivity;
 import com.example.haitran.cura.adapters.InQueueAdapter;
 import com.example.haitran.cura.models.Patient;
 
@@ -52,7 +51,7 @@ public class InQueueFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        page = getArguments().getInt("someInt",0);
+        page = getArguments().getInt("someInt", 0);
         mTitleFragment = getArguments().getString("someTitle");
     }
 
@@ -68,9 +67,9 @@ public class InQueueFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getWidget(view);
 
-        HomeFragment fragment =(HomeFragment)((HomeActivity) getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
-        if (fragment!=null)
-        patientsInQueueList = fragment.getPatientsInQueueList();
+        HomeFragment fragment = (HomeFragment) (getActivity()).getSupportFragmentManager().findFragmentByTag("FR_HOME");
+        if (fragment != null)
+            patientsInQueueList = fragment.getPatientsInQueueList();
 
         mSpinSelectDoctor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -115,6 +114,5 @@ public class InQueueFragment extends Fragment {
         recyclerView_In_Queue.setLayoutManager(mLayoutManager);
         adapter_In_Queue = new InQueueAdapter(getActivity(), patientsByDoctor);
         recyclerView_In_Queue.setAdapter(adapter_In_Queue);
-
     }
 }
