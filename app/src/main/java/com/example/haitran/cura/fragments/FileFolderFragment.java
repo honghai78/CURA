@@ -82,32 +82,6 @@ public class FileFolderFragment extends Fragment {
         mRecyclerView.setAdapter(recyclerFileFolderAdapter);
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_FILE_FOLDER");
-                    if (fragment != null) {
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                        fragmentTransaction.remove(fragment).commit();
-                        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-                        appCompatActivity.getSupportActionBar().setTitle("Files");
-                        appCompatActivity.getSupportActionBar().setSubtitle(null);
-                        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        appCompatActivity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
     private void loadDataForInternet(String filename){
         String url = "http://hinhnendep.pro/wp-content/uploads/2016/03/hinh-anh-hot-girl-dep-nhat-tren-facebook-2.jpg";
         ArrayList<String> today = new ArrayList<String>();

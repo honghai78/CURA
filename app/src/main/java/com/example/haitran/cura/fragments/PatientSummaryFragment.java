@@ -71,30 +71,4 @@ public class PatientSummaryFragment extends Fragment{
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(recyclerPatientDetailAdapter);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
-                    if (fragment != null) {
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                        fragmentTransaction.remove(fragment).commit();
-                        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-                        appCompatActivity.getSupportActionBar().setTitle("Home");
-                        appCompatActivity.getSupportActionBar().setSubtitle(null);
-                        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        appCompatActivity.getSupportActionBar().setHomeButtonEnabled(true);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
 }

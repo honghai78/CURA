@@ -107,7 +107,7 @@ public class CameraPreViewFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    ((CameraActivity) getActivity()).replace();
+                    ((CameraActivity) getActivity()).finish();
                     return true;
                 }
                 return false;

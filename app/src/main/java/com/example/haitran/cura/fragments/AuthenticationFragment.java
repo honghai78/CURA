@@ -200,7 +200,8 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
 
     private void inputDigit(int i) {
         if (lengthDigitInput()==4) {
-            Toast.makeText(getActivity(),"You are typed enough 4 digit",Toast.LENGTH_SHORT).show();
+            mToast.setText("You are typed enough 4 digit");
+            mToast.show();
         }
         switch (mTextDigitSelected){
             case 1:
@@ -264,6 +265,8 @@ public class AuthenticationFragment extends Fragment implements View.OnClickList
             getActivity().finish();
         }
         else {
+            mToast.setText("Incorrect password");
+            mToast.show();
             reInput();
         }
 

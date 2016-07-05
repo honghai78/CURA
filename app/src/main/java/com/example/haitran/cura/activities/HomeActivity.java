@@ -96,9 +96,9 @@ public class HomeActivity extends AppCompatActivity {
                 }else if (getSupportActionBar().getTitle().equals("Patient Detail :")){
                     ActionBar ab = getSupportActionBar();
                     ab.setTitle("Home");
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                    getSupportActionBar().setHomeButtonEnabled(true);
-                    getSupportActionBar().setSubtitle(null);
+                    ab.setDisplayHomeAsUpEnabled(true);
+                    ab.setHomeButtonEnabled(true);
+                    ab.setSubtitle(null);
                     Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
                     if (fragment != null) {
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -115,9 +115,50 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-//    @Override
+    @Override
+    public void onBackPressed() {
+        if(getSupportActionBar().getTitle().equals("Files")){
+            getSupportActionBar().setTitle("Patient Detail :");
+            PatientSummaryFragment fragment1 = (PatientSummaryFragment)getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
+            getSupportActionBar().setSubtitle(fragment1.getSubTitle());
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_FILE_HOME");
+            if (fragment != null) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                fragmentTransaction.remove(fragment).commit();
+            }
+        }else if(getSupportActionBar().getTitle().equals("Files :")){
+            getSupportActionBar().setTitle("Files");
+            getSupportActionBar().setSubtitle(null);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_FILE_FOLDER");
+            if (fragment != null) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                fragmentTransaction.remove(fragment).commit();
+            }
+        }else if (getSupportActionBar().getTitle().equals("Patient Detail :")){
+            ActionBar ab = getSupportActionBar();
+            ab.setTitle("Home");
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeButtonEnabled(true);
+            ab.setSubtitle(null);
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("PAGE_PATIENT_DETAIL");
+            if (fragment != null) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
+                fragmentTransaction.remove(fragment).commit();
+            }
+        }else {
+            Intent intent = new Intent(HomeActivity.this, SignInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+    //    @Override
 //    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 //        for (int i = 0; i < checkBoxList.size(); i++) {
 //            if (checkBoxList.get(i).isChecked()) {

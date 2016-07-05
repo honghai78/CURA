@@ -97,30 +97,4 @@ public class FileHomeFragment extends Fragment {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag("PAGE_FILE_HOME");
-                    if (fragment != null) {
-                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.setCustomAnimations(R.transition.sli_re_in, R.transition.sli_re_out);
-                        fragmentTransaction.remove(fragment).commit();
-                        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-                        appCompatActivity.getSupportActionBar().setTitle("Patient Detail:");
-                        appCompatActivity.getSupportActionBar().setSubtitle("Mr Kha");
-                        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        appCompatActivity.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-                    }
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
 }
