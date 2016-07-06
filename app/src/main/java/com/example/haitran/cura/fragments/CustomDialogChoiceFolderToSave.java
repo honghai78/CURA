@@ -2,6 +2,9 @@ package com.example.haitran.cura.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import com.example.haitran.cura.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -68,19 +72,18 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
                 boolean isCheck = false;
                 for (int i = 0; i < checkBoxList.size(); i++)
                     if (checkBoxList.get(i).isChecked()) {
-                        String imageName = new SimpleDateFormat("MMddyyyy_HHmmss").format(Calendar.getInstance().getTime());
-                        String folderName = checkBoxList.get(i).getText().toString().split(" ").toString();
 
-                        if (createDirectoryAndSaveFile(bytes, imageName, folderName)) {
-                            Toast.makeText(mActivity, "Saved at folder: " + folderName, Toast.LENGTH_SHORT).show();
+                        String imageName = new SimpleDateFormat("MMddyyyy_HHmmss").format(Calendar.getInstance().getTime());
+                        String folderName = checkBoxList.get(i).getText().toString();
+
+                        if (createDirectoryAndSaveFile(imageName, folderName)) {
+                            Toast.makeText(mActivity, "Saved", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(mActivity, "Save fail", Toast.LENGTH_SHORT).show();
                         }
-
                         isCheck = true;
                         break;
                     }
-
                 if (isCheck) {
                     dialog.dismiss();
                 } else {
@@ -112,27 +115,31 @@ public class CustomDialogChoiceFolderToSave extends Dialog implements CheckBox.O
         }
     }
 
-    private boolean createDirectoryAndSaveFile(byte[] bytes, String fileName, String folderName) {
+    private boolean createDirectoryAndSaveFile(String fileName, String folderName) {
 
         File direct = new File(Environment.getExternalStorageDirectory() + "/" + folderName);
+
         if (!direct.exists()) {
             File wallpaperDirectory = new File("/sdcard/" + folderName + "/");
             wallpaperDirectory.mkdirs();
         }
 
-        File file = new File(new File("/sdcard/" + folderName + "/"), fileName);
-        if (file.exists()) {
-            file.delete();
-        }
+        File file = new File(new File("/sdcard/" + folderName + "/"), fileName + ".jpg");
+        FileOutputStream output = null;
         try {
-            FileOutputStream out = new FileOutputStream(file);
-            out.write(bytes);
-            out.close();
-        } catch (Exception e) {
+            output = new FileOutputStream(file);
+            output.write(bytes);
+        } catch (IOException e) {
             e.printStackTrace();
-            return false;
+        } finally {
+            if (null != output) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return true;
     }
-
 }

@@ -76,8 +76,7 @@ public class InQueueFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 patientsByDoctor.clear();
                 String nameSelectedDoctor = mSpinSelectDoctor.getSelectedItem().toString();
-                if (!nameSelectedDoctor.equals("List Doctors:")) {
-                    mTxtSelectedDoctor.setText("Dr. " + nameSelectedDoctor);
+                if (!nameSelectedDoctor.equals("All")) {
 
                     for (int i = 0; i < patientsInQueueList.size(); i++) {
                         if (patientsInQueueList.get(i).getNameDoctor().equals(nameSelectedDoctor)) {
@@ -85,8 +84,13 @@ public class InQueueFragment extends Fragment {
                         }
                     }
                     adapter_In_Queue.notifyDataSetChanged();
+                    mTxtSelectedDoctor.setText("Dr. " + nameSelectedDoctor + " (" + patientsByDoctor.size() + ")");
                 } else {
-                    mTxtSelectedDoctor.setText("Select Doctor");
+                    for (int i = 0; i < patientsInQueueList.size(); i++) {
+                        patientsByDoctor.add(patientsInQueueList.get(i));
+                    }
+                    adapter_In_Queue.notifyDataSetChanged();
+                    mTxtSelectedDoctor.setText(nameSelectedDoctor + " (" + patientsByDoctor.size() + ")");
                 }
             }
 
@@ -101,7 +105,7 @@ public class InQueueFragment extends Fragment {
     public void getWidget(View view) {
         mTxtSelectedDoctor = (TextView) view.findViewById(R.id.txt_selected_doctor_frg_queue);
         mSpinSelectDoctor = (Spinner) view.findViewById(R.id.spin_select_doctor_frg_queue);
-        String[] doctors = new String[]{"List Doctors:", "Tom", "Jerry", "Jenifer", "Peter"};
+        String[] doctors = new String[]{"All", "Tom", "Jerry", "Jenifer", "Peter"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, doctors);
 
@@ -115,4 +119,5 @@ public class InQueueFragment extends Fragment {
         adapter_In_Queue = new InQueueAdapter(getActivity(), patientsByDoctor);
         recyclerView_In_Queue.setAdapter(adapter_In_Queue);
     }
+
 }
